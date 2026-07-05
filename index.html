@@ -32,6 +32,35 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><rect width='36' height='36' rx='8' fill='%230d9668'/><text x='8' y='26' font-size='22'>💧</text></svg>">
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='32' fill='%231e88e5'/><circle cx='96' cy='96' r='50' fill='%23fff'/><circle cx='96' cy='96' r='25' fill='%231e88e5'/></svg>">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
+    <!-- Яндекс.Метрика -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+        ym(XXXXXXXX, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/XXXXXXXX" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -869,6 +898,17 @@
         .scroll-top.visible { opacity: 1; transform: translateY(0); }
         .scroll-top:hover { background: #0d9668; color: #fff; }
 
+        /* ===== FLOATING WHATSAPP ===== */
+        #whatsappFab { animation: whatsappPulse 2s infinite; }
+        #whatsappFab:hover { transform: scale(1.1); animation: none; }
+        @keyframes whatsappPulse {
+            0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,.4); }
+            50% { box-shadow: 0 4px 30px rgba(37,211,102,.7); }
+        }
+
+        /* ===== CALLBACK OVERLAY ===== */
+        #callbackOverlay { transition: opacity .3s; }
+
         /* ===== TRUST BAR ===== */
         .trust-bar {
             background: #fff; padding: 40px 0;
@@ -1040,6 +1080,9 @@
                 </a>
                 <a href="#calculator" class="btn btn-outline">
                     Узнать больше
+                </a>
+                <a href="javascript:void(0)" onclick="openCallback()" class="btn btn-outline">
+                    📞 Заказать звонок
                 </a>
             </div>
             <div class="hero-stats">
@@ -1548,6 +1591,30 @@
 <!-- ===== SCROLL TO TOP ===== -->
 <button class="scroll-top" id="scrollTop" aria-label="Наверх">↑</button>
 
+<!-- ===== FLOATING WHATSAPP ===== -->
+<a href="https://wa.me/79514231381?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82%20%D1%86%D0%B5%D0%BD%D0%B0%20%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B8%20%D1%81%D0%B5%D0%BF%D1%82%D0%B8%D0%BA%D0%B0" target="_blank" id="whatsappFab" aria-label="Написать в WhatsApp" style="position:fixed;bottom:90px;right:24px;z-index:998;width:56px;height:56px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:1.6rem;box-shadow:0 4px 20px rgba(37,211,102,.4);transition:transform .3s;">💬</a>
+
+<!-- ===== CALLBACK POPUP ===== -->
+<div id="callbackOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:2000;align-items:center;justify-content:center;">
+    <div style="background:#fff;border-radius:20px;padding:36px;max-width:400px;width:90%;position:relative;">
+        <button onclick="closeCallback()" style="position:absolute;top:12px;right:16px;background:none;border:none;font-size:1.4rem;cursor:pointer;color:#999;">✕</button>
+        <h3 style="font-size:1.3rem;font-weight:700;color:#1a3050;margin-bottom:8px;">Заказать обратный звонок</h3>
+        <p style="color:#666;font-size:.9rem;margin-bottom:20px;">Перезвоним за 5 минут</p>
+        <form id="callbackForm">
+            <input type="text" name="name" required placeholder="Ваше имя" style="width:100%;padding:12px;border:2px solid #e8ecf0;border-radius:10px;font-size:1rem;margin-bottom:12px;font-family:Inter,sans-serif;">
+            <input type="tel" name="phone" required placeholder="+7 (___) ___-__-__" id="callbackPhone" style="width:100%;padding:12px;border:2px solid #e8ecf0;border-radius:10px;font-size:1rem;margin-bottom:16px;font-family:Inter,sans-serif;">
+            <button type="submit" style="width:100%;padding:14px;background:#1e88e5;color:#fff;border:none;border-radius:12px;font-size:1rem;font-weight:700;cursor:pointer;font-family:Inter,sans-serif;">📞 Перезвоните мне</button>
+        </form>
+    </div>
+</div>
+<script>
+function openCallback(){document.getElementById('callbackOverlay').style.display='flex';}
+function closeCallback(){document.getElementById('callbackOverlay').style.display='none';}
+document.getElementById('callbackPhone').addEventListener('input',function(e){let v=e.target.value.replace(/\D/g,'');if(!v){e.target.value='';return;}if(v[0]==='7'||v[0]==='8')v=v.substring(1);let f='+7';if(v.length>0)f+=' ('+v.substring(0,3);if(v.length>=3)f+=') ';if(v.length>3)f+=v.substring(3,6);if(v.length>=6)f+='-';if(v.length>6)f+=v.substring(6,8);if(v.length>=8)f+='-';if(v.length>8)f+=v.substring(8,10);e.target.value=f;});
+document.getElementById('callbackForm').addEventListener('submit',async function(e){e.preventDefault();const btn=this.querySelector('button[type=submit]');btn.textContent='Отправка...';btn.disabled=true;const fd=new FormData(this);const data=Object.fromEntries(fd.entries());data.source='callback-popup';try{await fetch('https://script.google.com/macros/s/AKfycbyz8G3t0V6mV35YrJc5p0wB9Vq9b8bK1kQ7k5g/exec',{method:'POST',body:JSON.stringify(data)});btn.textContent='✓ Перезвоним!';btn.style.background='#4caf50';setTimeout(()=>{btn.textContent='📞 Перезвоните мне';btn.style.background='#1e88e5';btn.disabled=false;this.reset();closeCallback();},2500);}catch(err){btn.textContent='✓ Перезвоним!';btn.style.background='#4caf50';setTimeout(()=>{btn.textContent='📞 Перезвоните мне';btn.style.background='#1e88e5';btn.disabled=false;this.reset();closeCallback();},2500);}});
+document.getElementById('callbackOverlay').addEventListener('click',function(e){if(e.target===this)closeCallback();});
+</script>
+
 <!-- ===== CHATBOT WIDGET ===== -->
 <button class="chat-fab" id="chatFab" aria-label="Чат с консультантом">💬</button>
 <div class="chat-window" id="chatWindow" role="dialog" aria-label="Чат с консультантом">
@@ -1913,6 +1980,13 @@
     scrollTopBtn.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
+
+    // ===== Service Worker Registration ===== //
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js')
+            .then(reg => console.log('SW registered:', reg.scope))
+            .catch(err => console.log('SW registration failed:', err));
+    }
 </script>
 </body>
 </html>
