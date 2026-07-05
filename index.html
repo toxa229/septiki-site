@@ -371,6 +371,7 @@
         }
         .contact-info h3 { margin-bottom: 16px; }
         .contact-info p { color: #aaa; margin-bottom: 8px; display: flex; align-items: center; gap: 12px; }
+        .contact-info .spacer { margin-top: 32px; }
         .contact-form { display: flex; flex-direction: column; gap: 16px; }
         .contact-form input,
         .contact-form textarea,
@@ -704,158 +705,49 @@
             </div>
         </div>
         <div class="hero-visual">
-            <!-- Анимированная схема септика -->
+            <!-- Схематичная иллюстрация септика -->
             <svg viewBox="0 0 400 320" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <style>
-                    /* Пузырьки вверх */
-                    @keyframes bubbleRise {
-                        0% { transform: translateY(0); opacity: .5; }
-                        50% { opacity: .8; }
-                        100% { transform: translateY(-40px); opacity: 0; }
-                    }
-                    .b1 { animation: bubbleRise 2.5s ease-in-out infinite; }
-                    .b2 { animation: bubbleRise 2.5s ease-in-out infinite .6s; }
-                    .b3 { animation: bubbleRise 2.5s ease-in-out infinite 1.2s; }
-                    .b4 { animation: bubbleRise 2.5s ease-in-out infinite 1.8s; }
-                    .b5 { animation: bubbleRise 2.5s ease-in-out infinite .3s; }
-                    /* Поток в трубе вход */
-                    @keyframes flowRight {
-                        0% { transform: translateX(-20px); opacity: 0; }
-                        30% { opacity: 1; }
-                        70% { opacity: 1; }
-                        100% { transform: translateX(55px); opacity: 0; }
-                    }
-                    .flow-in { animation: flowRight 2s linear infinite; }
-                    /* Поток в трубе выход */
-                    @keyframes flowOut {
-                        0% { transform: translateX(0); opacity: 0; }
-                        30% { opacity: 1; }
-                        70% { opacity: 1; }
-                        100% { transform: translateX(55px); opacity: 0; }
-                    }
-                    .flow-out { animation: flowOut 2s linear infinite .8s; }
-                    /* Волна на воде */
-                    @keyframes wave {
-                        0% { d: path("M82 185 Q140 178 200 185 Q260 192 318 185"); }
-                        50% { d: path("M82 185 Q140 192 200 185 Q260 178 318 185"); }
-                        100% { d: path("M82 185 Q140 178 200 185 Q260 192 318 185"); }
-                    }
-                    .wave-line { animation: wave 3s ease-in-out infinite; }
-                    /* Дым из трубы дома */
-                    @keyframes smoke {
-                        0% { transform: translateY(0) scale(1); opacity: .4; }
-                        100% { transform: translateY(-20px) scale(1.5); opacity: 0; }
-                    }
-                    .smoke1 { animation: smoke 3s ease-out infinite; }
-                    .smoke2 { animation: smoke 3s ease-out infinite 1s; }
-                    .smoke3 { animation: smoke 3s ease-out infinite 2s; }
-                    /* Пульс септика */
-                    @keyframes tankPulse {
-                        0%, 100% { opacity: 0; }
-                        50% { opacity: .15; }
-                    }
-                    .tank-glow { animation: tankPulse 4s ease-in-out infinite; }
-                    /* Фильтрация в поле */
-                    @keyframes filterDrip {
-                        0% { transform: translateY(-5px); opacity: 0; }
-                        40% { opacity: .6; }
-                        100% { transform: translateY(15px); opacity: 0; }
-                    }
-                    .drip1 { animation: filterDrip 2s ease-in infinite; }
-                    .drip2 { animation: filterDrip 2s ease-in infinite .7s; }
-                    .drip3 { animation: filterDrip 2s ease-in infinite 1.4s; }
-                    /* Стрелка потока вход */
-                    @keyframes arrowPulse {
-                        0%, 100% { opacity: .5; }
-                        50% { opacity: 1; }
-                    }
-                    .arrow-pulse { animation: arrowPulse 1.5s ease-in-out infinite; }
-                    /* Плавное покачивание дома */
-                    @keyframes houseFloat {
-                        0%, 100% { transform: translateY(0); }
-                        50% { transform: translateY(-2px); }
-                    }
-                    .house-group { animation: houseFloat 4s ease-in-out infinite; }
-                </style>
-
-                <defs>
-                    <marker id="arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-                        <path d="M0,0 L8,3 L0,6" fill="#1a7a5a"/>
-                    </marker>
-                    <clipPath id="tankClip">
-                        <rect x="82" y="130" width="236" height="100" rx="12"/>
-                    </clipPath>
-                </defs>
-
                 <!-- ground line -->
                 <rect x="0" y="60" width="400" height="8" rx="4" fill="#c4b998"/>
                 <!-- grass -->
                 <rect x="0" y="0" width="400" height="60" rx="8" fill="#a8d5a2" opacity=".4"/>
                 <path d="M0 60 Q40 40 80 60 Q120 40 160 60 Q200 40 240 60 Q280 40 320 60 Q360 40 400 60" fill="#7ecb79" opacity=".3"/>
-
-                <!-- === ДОМ с дымком === -->
-                <g class="house-group">
-                    <rect x="40" y="10" width="60" height="50" rx="6" fill="#f0d9b5"/>
-                    <polygon points="35,10 70,0 105,10" fill="#d4a373"/>
-                    <rect x="58" y="32" width="18" height="28" rx="2" fill="#8fc1d9"/>
-                    <!-- окошки -->
-                    <rect x="44" y="18" width="10" height="10" rx="2" fill="#8fc1d9" opacity=".7"/>
-                    <rect x="78" y="18" width="10" height="10" rx="2" fill="#8fc1d9" opacity=".7"/>
-                    <!-- дым из трубы -->
-                    <circle class="smoke1" cx="95" cy="5" r="3" fill="#bbb" opacity=".4"/>
-                    <circle class="smoke2" cx="98" cy="2" r="2.5" fill="#ccc" opacity=".3"/>
-                    <circle class="smoke3" cx="93" cy="8" r="2" fill="#ddd" opacity=".25"/>
-                    <text x="46" y="76" fill="#888" font-size="10">дом</text>
-                </g>
-
-                <!-- === ВХОДНАЯ ТРУБА с потоком === -->
-                <rect x="30" y="130" width="48" height="14" rx="7" fill="#1a7a5a"/>
-                <!-- частицы потока -->
-                <circle class="flow-in" cx="40" cy="137" r="2.5" fill="#fff" opacity=".8"/>
-                <circle class="flow-in" cx="32" cy="137" r="2" fill="#fff" opacity=".6" style="animation-delay:.7s"/>
-                <circle class="flow-in" cx="48" cy="137" r="1.5" fill="#fff" opacity=".5" style="animation-delay:1.4s"/>
-                <text x="36" y="124" fill="#666" font-size="11" class="arrow-pulse">вход ▸</text>
-
-                <!-- === ГЛАВНЫЙ БАК === -->
+                <!-- main tank -->
                 <rect x="70" y="90" width="260" height="150" rx="24" fill="#e8f0eb" stroke="#1a7a5a" stroke-width="2"/>
-                <!-- Свечение бака -->
-                <rect class="tank-glow" x="70" y="90" width="260" height="150" rx="24" fill="#1a7a5a"/>
-
-                <!-- === ВОДА с волной === -->
+                <!-- water level -->
                 <rect x="82" y="170" width="236" height="60" rx="12" fill="#4fa3e0" opacity=".45"/>
-                <path class="wave-line" d="M82 185 Q140 178 200 185 Q260 192 318 185" stroke="#4fa3e0" stroke-width="2" fill="none" opacity=".6"/>
-
-                <!-- === ПЕРЕГОРОДКИ === -->
+                <!-- baffle left -->
                 <rect x="140" y="100" width="6" height="70" rx="3" fill="#1a7a5a" opacity=".4"/>
+                <!-- baffle right -->
                 <rect x="250" y="100" width="6" height="70" rx="3" fill="#1a7a5a" opacity=".4"/>
-
-                <!-- === ПУЗЫРЬКИ === -->
-                <circle class="b1" cx="110" cy="200" r="4" fill="#4fa3e0" opacity=".5"/>
-                <circle class="b2" cx="140" cy="210" r="6" fill="#4fa3e0" opacity=".4"/>
-                <circle class="b3" cx="170" cy="195" r="3" fill="#4fa3e0" opacity=".6"/>
-                <circle class="b4" cx="200" cy="215" r="5" fill="#4fa3e0" opacity=".4"/>
-                <circle class="b5" cx="230" cy="205" r="3.5" fill="#4fa3e0" opacity=".45"/>
-
-                <!-- === ВЫХОДНАЯ ТРУБА с потоком === -->
+                <!-- inlet pipe -->
+                <rect x="30" y="130" width="48" height="14" rx="7" fill="#1a7a5a"/>
+                <!-- outlet pipe -->
                 <rect x="322" y="130" width="48" height="14" rx="7" fill="#1a7a5a"/>
-                <circle class="flow-out" cx="330" cy="137" r="2.5" fill="#fff" opacity=".8"/>
-                <circle class="flow-out" cx="340" cy="137" r="2" fill="#fff" opacity=".6" style="animation-delay:.5s"/>
-                <text x="326" y="124" fill="#666" font-size="11">▸ выход</text>
-
-                <!-- === ПОЛЕ ФИЛЬТРАЦИИ с каплями === -->
+                <!-- inlet arrow -->
+                <path d="M36 137 L24 137" stroke="#1a7a5a" stroke-width="2" marker-end="url(#arrow)"/>
+                <text x="42" y="124" fill="#666" font-size="12">вход</text>
+                <text x="330" y="124" fill="#666" font-size="12">выход</text>
+                <!-- bubbles -->
+                <circle cx="110" cy="200" r="4" fill="#4fa3e0" opacity=".4"/>
+                <circle cx="140" cy="210" r="6" fill="#4fa3e0" opacity=".3"/>
+                <circle cx="170" cy="195" r="3" fill="#4fa3e0" opacity=".5"/>
+                <circle cx="200" cy="215" r="5" fill="#4fa3e0" opacity=".35"/>
+                <!-- house -->
+                <rect x="40" y="10" width="60" height="50" rx="6" fill="#f0d9b5"/>
+                <polygon points="35,10 70,0 105,10" fill="#d4a373"/>
+                <rect x="58" y="32" width="18" height="28" rx="2" fill="#8fc1d9"/>
+                <text x="46" y="76" fill="#888" font-size="10">дом</text>
+                <!-- drainage field -->
                 <rect x="300" y="200" width="80" height="30" rx="8" fill="#a8d5a2" opacity=".5"/>
-                <!-- капли фильтрации -->
-                <circle class="drip1" cx="315" cy="205" r="2" fill="#4fa3e0" opacity=".5"/>
-                <circle class="drip2" cx="335" cy="208" r="2.5" fill="#4fa3e0" opacity=".4"/>
-                <circle class="drip3" cx="355" cy="203" r="2" fill="#4fa3e0" opacity=".45"/>
                 <text x="310" y="244" fill="#888" font-size="10">поле фильтрации</text>
-
-                <!-- Стрелка потока -->
-                <path d="M36 137 L24 137" stroke="#1a7a5a" stroke-width="2" marker-end="url(#arrow)" class="arrow-pulse"/>
-
-                <!-- Подпись -->
-                <rect x="95" y="254" width="160" height="26" rx="13" fill="#1a7a5a" opacity=".1"/>
-                <text x="175" y="271" fill="#1a7a5a" font-size="13" font-weight="600" text-anchor="middle">Септик 3-камерный</text>
+                <!-- arrows on pipes -->
+                <defs>
+                    <marker id="arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                        <path d="M0,0 L8,3 L0,6" fill="#1a7a5a"/>
+                    </marker>
+                </defs>
+                <text x="140" y="260" fill="#1a7a5a" font-size="14" font-weight="600" text-anchor="middle">Септик 3-камерный</text>
             </svg>
         </div>
     </div>
@@ -1052,7 +944,7 @@
                 <p>✉ <a href="mailto:fortnut038@gmail.com" style="color:#fff; text-decoration:none;">fortnut038@gmail.com</a></p>
                 <p>📍 г. Орёл, пер. Крымский, 2</p>
                 <p>🕐 Пн–Пт: 9:00–20:00, Сб: 10:00–18:00</p>
-                <br>
+                <div class="spacer"></div>
                 <h3>Остались вопросы?</h3>
                 <p style="color:#aaa;">Заполните форму, и наш инженер свяжется с вами в течение 30 минут.</p>
                 <p style="color:#aaa;">Или звоните прямо сейчас — проконсультируем бесплатно!</p>
@@ -1172,8 +1064,6 @@
         const origText = submitBtn.innerHTML;
         submitBtn.innerHTML = '⏳ Отправка...';
         submitBtn.disabled = true;
-
-
 
         // Параллельно отправляем в Telegram и на Email
         const results = await Promise.allSettled([
@@ -1334,7 +1224,6 @@
             answer: '💳 <strong>Оплата:</strong><br><br>✅ Наличный и безналичный расчёт<br>✅ Рассрочка на установку<br>✅ Скидки при оплате полной суммы<br><br>Точная стоимость — по результатам выезда инженера. <a href="#contact">Оставьте заявку</a> — рассчитаем бесплатно!'
         }
     ];
-
 
     function findAnswer(userText) {
         const text = userText.toLowerCase().replace(/[^\p{L}\p{N}\s]/gu, '');
