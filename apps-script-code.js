@@ -18,18 +18,27 @@ function doPost(e) {
   try {
     const data = JSON.parse(e.postData.contents);
 
+    // Валидация
+    if (!data.name || !data.phone) {
+      return ContentService
+        .createTextOutput(JSON.stringify({ success: false, error: 'Имя и телефон обязательны' }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
     // Формируем сообщение для Telegram
-    let msg = '📋 <b>Новая заявка с сайта СептикПро</b>\n\n';
+    let msg = '📋 <b>Новая заявка с сайта СептикПро</b>\n';
+    msg += '━━━━━━━━━━━━━━━━━━━━━\n\n';
     msg += '👤 <b>Имя:</b> ' + (data.name || '—') + '\n';
     msg += '📞 <b>Телефон:</b> ' + (data.phone || '—') + '\n';
-    msg += '✉️ <b>Email:</b> ' + (data.email || '—') + '\n';
-    msg += '🔧 <b>Тип септика:</b> ' + (data.type || '—') + '\n';
-    msg += '💬 <b>Комментарий:</b> ' + (data.comment || '—') + '\n';
-    msg += '\n🕐 ' + new Date().toLocaleString('ru-RU', { timeZone: 'Europe/Moscow' });
+    msg += '✉️ <b>Email:</b> ' + (data.email || 'не указан') + '\n';
+    msg += '🔧 <b>Тип септика:</b> ' + (data.type || 'не указано') + '\n';
+    msg += '💬 <b>Комментарий:</b> ' + (data.comment || 'нет') + '\n';
+    msg += '\n━━━━━━━━━━━━━━━━━━━━━\n';
+    msg += '🕐 ' + new Date().toLocaleString('ru-RU', { timeZone: 'Europe/Moscow' });
 
     // Отправляем в Telegram
     const telegramUrl = 'https://api.telegram.org/bot' + BOT_TOKEN + '/sendMessage';
-    UrlFetchApp.fetch(telegramUrl, {
+    const response = UrlFetchApp.fetch(telegramUrl, {
       method: 'post',
       contentType: 'application/json',
       payload: JSON.stringify({
@@ -39,11 +48,17 @@ function doPost(e) {
       })
     });
 
+    const result = JSON.parse(response.getContentText());
+    if (!result.ok) {
+      throw new Error('Telegram API error: ' + (result.description || 'unknown'));
+    }
+
     return ContentService
       .createTextOutput(JSON.stringify({ success: true }))
       .setMimeType(ContentService.MimeType.JSON);
 
   } catch (err) {
+    Logger.log('ERROR: ' + err.toString());
     return ContentService
       .createTextOutput(JSON.stringify({ success: false, error: err.toString() }))
       .setMimeType(ContentService.MimeType.JSON);
@@ -52,14 +67,6 @@ function doPost(e) {
 
 // Тестовая функция — запусти в редакторе чтобы проверить
 function testSend() {
-  const testData = {
-    name: 'Тестовый пользователь',
-    phone: '+7 999 123-45-67',
-    email: 'test@example.com',
-    type: 'Стандарт',
-    comment: 'Тестовое сообщение из Apps Script'
-  };
-
   const telegramUrl = 'https://api.telegram.org/bot' + BOT_TOKEN + '/sendMessage';
   const msg = '✅ <b>Тест прошёл успешно!</b>\n\nБот настроен правильно.';
 

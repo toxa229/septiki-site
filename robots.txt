@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://septikpro57.ru/sitemap.xml
