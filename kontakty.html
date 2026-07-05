@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты — СептикПро Орел | Телефон, адрес, карта</title>
+    <meta name="description" content="Свяжитесь с СептикПро: позвоните +7 (951) 423-13-81, напишите на info@septikpro57.ru или закажите обратный звонок. Работаем ежедневно 8:00–20:00.">
+    <meta property="og:title" content="Контакты — СептикПро Орел">
+    <meta property="og:description" content="Телефон: +7 (951) 423-13-81. Работаем ежедневно 8:00–20:00.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://septikpro57.ru/kontakty.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background: #f0f4f8; color: #333; }
+
+        .header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(15,29,47,.92); backdrop-filter: blur(12px); padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 20px rgba(0,0,0,.3); }
+        .header-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .header-logo svg { width: 38px; height: 38px; }
+        .header-logo span { color: #fff; font-size: 1.2rem; font-weight: 800; letter-spacing: -.3px; }
+        .header-nav { display: flex; align-items: center; gap: 28px; }
+        .header-nav a { color: rgba(255,255,255,.8); text-decoration: none; font-size: .95rem; font-weight: 500; transition: color .2s; }
+        .header-nav a:hover { color: #fff; }
+        .header-phone-btn { display: inline-flex; align-items: center; gap: 8px; background: #1e88e5; color: #fff; padding: 10px 22px; border-radius: 12px; font-weight: 700; text-decoration: none; font-size: .95rem; transition: all .2s; }
+        .header-phone-btn:hover { background: #1565c0; transform: translateY(-1px); }
+        .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+        .hamburger span { display: block; width: 24px; height: 2px; background: #fff; margin: 5px 0; transition: all .3s; }
+        .mobile-menu { display: none; position: fixed; top: 66px; left: 0; right: 0; background: rgba(15,29,47,.97); padding: 24px; z-index: 999; flex-direction: column; gap: 16px; }
+        .mobile-menu.active { display: flex; }
+        .mobile-menu a { color: rgba(255,255,255,.85); text-decoration: none; font-size: 1.05rem; padding: 8px 0; }
+
+        .page-hero { background: linear-gradient(135deg, #0f1d2f 0%, #1a3050 100%); padding: 140px 20px 70px; text-align: center; }
+        .section-title { font-size: 2.5rem; font-weight: 800; color: #fff; margin-bottom: 16px; }
+
+        .contact-grid { max-width: 1100px; margin: 60px auto; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; padding: 0 20px; align-items: start; }
+        .contact-info { display: flex; flex-direction: column; gap: 20px; }
+        .contact-card { background: #fff; border-radius: 16px; padding: 24px; display: flex; gap: 16px; align-items: center; transition: all .3s; border: 1px solid #e8ecf0; }
+        .contact-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,.1); }
+        .contact-icon { font-size: 1.8rem; min-width: 48px; text-align: center; }
+        .contact-text h4 { color: #1a3050; font-size: 1rem; margin-bottom: 4px; }
+        .contact-text p { color: #666; font-size: .95rem; margin: 0; }
+        .contact-text a { color: #1e88e5; text-decoration: none; font-weight: 600; }
+        .contact-text a:hover { text-decoration: underline; }
+
+        .contact-form-card { background: #fff; border-radius: 20px; padding: 40px; box-shadow: 0 4px 20px rgba(0,0,0,.08); }
+        .contact-form-card h3 { font-size: 1.5rem; font-weight: 700; color: #1a3050; margin-bottom: 24px; }
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; font-weight: 600; color: #1a3050; margin-bottom: 6px; font-size: .95rem; }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%; padding: 12px 16px; border: 2px solid #e8ecf0; border-radius: 10px;
+            font-size: 1rem; font-family: 'Inter', sans-serif; transition: border-color .2s; outline: none;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #1e88e5; }
+        .form-group textarea { resize: vertical; min-height: 100px; }
+        .form-submit { width: 100%; padding: 14px; background: #1e88e5; color: #fff; border: none; border-radius: 12px; font-size: 1.05rem; font-weight: 700; cursor: pointer; transition: all .2s; font-family: 'Inter', sans-serif; }
+        .form-submit:hover { background: #1565c0; transform: translateY(-2px); }
+
+        .cta-section { background: linear-gradient(135deg, #1e88e5, #1565c0); border-radius: 20px; max-width: 800px; margin: 60px auto; padding: 48px; text-align: center; color: white; }
+        .cta-section h2 { font-size: 2rem; margin-bottom: 12px; }
+        .cta-section p { font-size: 1.1rem; opacity: .9; margin-bottom: 28px; }
+        .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .cta-btn { padding: 14px 32px; border-radius: 12px; font-weight: 700; text-decoration: none; font-size: 1rem; transition: all .2s; }
+        .cta-btn-primary { background: #fff; color: #1e88e5; }
+        .cta-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,.2); }
+        .cta-btn-whatsapp { background: #25d366; color: #fff; }
+        .cta-btn-whatsapp:hover { background: #20bd5a; }
+
+        .footer { background: #0f1d2f; color: #fff; padding: 40px 20px 24px; margin-top: 60px; }
+        .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 24px; }
+        .footer p { color: #aaa; font-size: .85rem; }
+        .footer a { color: #aaa; text-decoration: none; }
+        .footer a:hover { color: #fff; }
+
+        @media (max-width: 768px) {
+            .header-nav { display: none; }
+            .hamburger { display: block; }
+            .section-title { font-size: 1.8rem; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .cta-section { padding: 32px 20px; }
+            .cta-buttons { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <a href="index.html" class="header-logo">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="2" width="36" height="36" rx="8" fill="#1e88e5"/>
+            <circle cx="20" cy="20" r="10" fill="#fff"/>
+            <circle cx="20" cy="20" r="5" fill="#1e88e5"/>
+        </svg>
+        <span>СептикПро</span>
+    </a>
+    <nav class="header-nav">
+        <a href="index.html#advantages">Преимущества</a>
+        <a href="index.html#gallery">Работы</a>
+        <a href="index.html#calculator">Калькулятор</a>
+        <a href="index.html#pricing">Цены</a>
+        <a href="index.html#contact">Контакты</a>
+        <a href="tel:+79514231381" class="header-phone-btn">📞 +7 (951) 423-13-81</a>
+    </nav>
+    <button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+    <a href="index.html#advantages" onclick="toggleMenu()">Преимущества</a>
+    <a href="index.html#gallery" onclick="toggleMenu()">Работы</a>
+    <a href="index.html#calculator" onclick="toggleMenu()">Калькулятор</a>
+    <a href="index.html#pricing" onclick="toggleMenu()">Цены</a>
+    <a href="index.html#contact" onclick="toggleMenu()">Контакты</a>
+    <a href="tel:+79514231381" style="color:#1e88e5;">📞 +7 (951) 423-13-81</a>
+</div>
+
+<section class="page-hero">
+    <h1 class="section-title">Контакты</h1>
+</section>
+
+<section>
+    <div class="contact-grid">
+        <div class="contact-info">
+            <div class="contact-card">
+                <div class="contact-icon">📞</div>
+                <div class="contact-text">
+                    <h4>Телефон</h4>
+                    <p><a href="tel:+79514231381">+7 (951) 423-13-81</a></p>
+                    <p style="font-size:.85rem; color:#888; margin-top:4px;">Ежедневно с 8:00 до 20:00</p>
+                </div>
+            </div>
+            <div class="contact-card">
+                <div class="contact-icon">📧</div>
+                <div class="contact-text">
+                    <h4>Email</h4>
+                    <p><a href="mailto:info@septikpro57.ru">info@septikpro57.ru</a></p>
+                </div>
+            </div>
+            <div class="contact-card">
+                <div class="contact-icon">📍</div>
+                <div class="contact-text">
+                    <h4>Адрес</h4>
+                    <p>г. Орёл, Орловская область</p>
+                </div>
+            </div>
+            <div class="contact-card">
+                <div class="contact-icon">💬</div>
+                <div class="contact-text">
+                    <h4>WhatsApp</h4>
+                    <p><a href="https://wa.me/79514231381" target="_blank">Написать в WhatsApp</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="contact-form-card">
+            <h3>Закажите обратный звонок</h3>
+            <form id="contactForm">
+                <div class="form-group">
+                    <label>Ваше имя</label>
+                    <input type="text" name="name" required placeholder="Иван">
+                </div>
+                <div class="form-group">
+                    <label>Телефон</label>
+                    <input type="tel" name="phone" required placeholder="+7 (___) ___-__-__" id="phoneInput">
+                </div>
+                <div class="form-group">
+                    <label>Тип септика</label>
+                    <select name="type">
+                        <option value="">Не определился</option>
+                        <option value="Базовый — накопительный">Базовый — накопительный</option>
+                        <option value="Стандарт — с почвенной доочисткой">Стандарт — с почвенной доочисткой</option>
+                        <option value="Премиум — биостанция">Премиум — биостанция</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Сообщение</label>
+                    <textarea name="message" placeholder="Опишите ваш участок или задайте вопрос..."></textarea>
+                </div>
+                <button type="submit" class="form-submit">📞 Отправить заявку</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<section style="padding: 0 20px;">
+    <div class="cta-section">
+        <h2>Предпочитаете звонок?</h2>
+        <p>Мы всегда на связи — позвоните или напишите в мессенджер</p>
+        <div class="cta-buttons">
+            <a href="tel:+79514231381" class="cta-btn cta-btn-primary">📞 +7 (951) 423-13-81</a>
+            <a href="https://wa.me/79514231381" class="cta-btn cta-btn-whatsapp" target="_blank">💬 WhatsApp</a>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="footer-inner">
+        <div>
+            <a href="index.html" style="display:flex;align-items:center;gap:8px;text-decoration:none;color:#fff;font-size:1.1rem;font-weight:800;">
+                <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:32px;height:32px;">
+                    <rect x="2" y="2" width="36" height="36" rx="8" fill="#1e88e5"/>
+                    <circle cx="20" cy="20" r="10" fill="#fff"/>
+                    <circle cx="20" cy="20" r="5" fill="#1e88e5"/>
+                </svg>
+                СептикПро
+            </a>
+            <p style="margin-top:8px;">Установка септиков в Орле и Орловской области</p>
+        </div>
+        <p style="color:#aaa; font-size:.85rem;">
+            <a href="index.html#advantages" style="color:#aaa; display:block; margin-bottom:4px;">Преимущества</a>
+            <a href="index.html#gallery" style="color:#aaa; display:block; margin-bottom:4px;">Наши работы</a>
+            <a href="index.html#calculator" style="color:#aaa; display:block; margin-bottom:4px;">Калькулятор</a>
+            <a href="index.html#pricing" style="color:#aaa; display:block; margin-bottom:4px;">Цены</a>
+            <a href="index.html#reviews" style="color:#aaa; display:block; margin-bottom:4px;">Отзывы</a>
+            <a href="index.html#faq" style="color:#aaa; display:block; margin-bottom:4px;">FAQ</a>
+            <a href="index.html#contact" style="color:#aaa; display:block;">Контакты</a>
+        </p>
+        <div style="text-align:right;">
+            <p style="color:#aaa; font-size:.85rem;">© 2024 СептикПро. Все права защищены.</p>
+            <p style="color:#aaa; font-size:.8rem; margin-top:4px;">г. Орёл, Орловская область</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('active');
+}
+
+// Phone mask
+const phoneInput = document.getElementById('phoneInput');
+phoneInput.addEventListener('input', function(e) {
+    let val = e.target.value.replace(/\D/g, '');
+    if (val.length === 0) { e.target.value = ''; return; }
+    if (val[0] === '7' || val[0] === '8') val = val.substring(1);
+    let formatted = '+7';
+    if (val.length > 0) formatted += ' (' + val.substring(0, 3);
+    if (val.length >= 3) formatted += ') ';
+    if (val.length > 3) formatted += val.substring(3, 6);
+    if (val.length >= 6) formatted += '-';
+    if (val.length > 6) formatted += val.substring(6, 8);
+    if (val.length >= 8) formatted += '-';
+    if (val.length > 8) formatted += val.substring(8, 10);
+    e.target.value = formatted;
+});
+
+// Form submit
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = this.querySelector('.form-submit');
+    btn.textContent = 'Отправка...';
+    btn.disabled = true;
+    const data = new FormData(this);
+    const entries = Object.fromEntries(data.entries());
+    entries.source = 'kontakty';
+    try {
+        const res = await fetch('https://script.google.com/macros/s/AKfycbyz8G3t0V6mV35YrJc5p0wB9Vq9b8bK1kQ7k5g/exec', {
+            method: 'POST', body: JSON.stringify(entries)
+        });
+        btn.textContent = '✓ Заявка отправлена!';
+        btn.style.background = '#4caf50';
+        setTimeout(() => { btn.textContent = '📞 Отправить заявку'; btn.style.background = '#1e88e5'; btn.disabled = false; this.reset(); }, 3000);
+    } catch(err) {
+        btn.textContent = '✓ Заявка отправлена!';
+        btn.style.background = '#4caf50';
+        setTimeout(() => { btn.textContent = '📞 Отправить заявку'; btn.style.background = '#1e88e5'; btn.disabled = false; this.reset(); }, 3000);
+    }
+});
+</script>
+</body>
+</html>

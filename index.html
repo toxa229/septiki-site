@@ -869,6 +869,31 @@
         .scroll-top.visible { opacity: 1; transform: translateY(0); }
         .scroll-top:hover { background: #0d9668; color: #fff; }
 
+        /* ===== TRUST BAR ===== */
+        .trust-bar {
+            background: #fff; padding: 40px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,.06);
+        }
+        .trust-items {
+            display: flex; justify-content: space-around; align-items: center;
+            flex-wrap: wrap; gap: 32px;
+        }
+        .trust-item {
+            text-align: center; min-width: 150px;
+        }
+        .trust-icon {
+            font-size: 2rem; margin-bottom: 8px;
+        }
+        .trust-value {
+            font-size: 1.8rem; font-weight: 800;
+            background: linear-gradient(135deg, #0d9668, #065f46);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .trust-label {
+            font-size: .9rem; color: #888; margin-top: 4px;
+        }
+
         /* ===== LOADING SPINNER ===== */
         .spinner {
             display: inline-block; width: 20px; height: 20px;
@@ -877,6 +902,61 @@
             margin-right: 8px; vertical-align: middle;
         }
         @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ===== GALLERY ===== */
+        .gallery-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+        .gallery-card {
+            background: #fff; border-radius: 20px; overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,.06);
+            transition: transform .4s ease, box-shadow .4s ease;
+        }
+        .gallery-card:hover {
+            transform: translateY(-8px); box-shadow: 0 16px 50px rgba(0,0,0,.12);
+        }
+        .gallery-placeholder {
+            height: 200px; display: flex; align-items: center; justify-content: center;
+        }
+        .gallery-placeholder svg { width: 100%; height: 100%; }
+        .gallery-info { padding: 20px; }
+        .gallery-info h4 { font-size: 1.1rem; margin-bottom: 4px; color: #1a1a2e; }
+        .gallery-info p { color: #888; font-size: .9rem; }
+
+        /* ===== REVIEWS ===== */
+        .reviews-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+        .review-card {
+            background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
+            border-radius: 20px; padding: 28px;
+            transition: all .4s ease;
+        }
+        .review-card:hover {
+            background: rgba(255,255,255,.1);
+            transform: translateY(-4px);
+        }
+        .review-stars {
+            color: #fbbf24; font-size: 1.2rem; margin-bottom: 12px;
+            letter-spacing: 2px;
+        }
+        .review-text {
+            color: #ddd; font-size: .95rem; line-height: 1.6;
+            margin-bottom: 16px; font-style: italic;
+        }
+        .review-author {
+            display: flex; align-items: center; gap: 12px;
+        }
+        .review-avatar {
+            width: 44px; height: 44px; border-radius: 50%;
+            background: linear-gradient(135deg, #0d9668, #065f46);
+            color: #fff; display: flex; align-items: center;
+            justify-content: center; font-weight: 700; font-size: .9rem;
+        }
+        .review-name { font-weight: 600; color: #fff; font-size: .95rem; }
+        .review-location { color: #aaa; font-size: .85rem; }
 
         /* ===== FORM VALIDATION ===== */
         .contact-form input:invalid:not(:placeholder-shown) {
@@ -931,11 +1011,11 @@
             СептикПро
         </a>
         <ul class="nav-links" id="navLinks">
-            <li><a href="#types">Типы септиков</a></li>
             <li><a href="#advantages">Преимущества</a></li>
+            <li><a href="#gallery">Работы</a></li>
             <li><a href="#calculator">Калькулятор</a></li>
             <li><a href="#pricing">Цены</a></li>
-            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#reviews">Отзывы</a></li>
             <li><a href="#contact" class="btn btn-primary">Заказать звонок</a></li>
         </ul>
         <button class="burger" id="burgerBtn" aria-label="Меню">
@@ -958,7 +1038,7 @@
                 <a href="#contact" class="btn btn-primary">
                     ✦ Рассчитать стоимость
                 </a>
-                <a href="#types" class="btn btn-outline">
+                <a href="#calculator" class="btn btn-outline">
                     Узнать больше
                 </a>
             </div>
@@ -1027,30 +1107,29 @@
     </div>
 </section>
 
-<!-- ===== TYPES ===== -->
-<section class="section" id="types">
+<!-- ===== TRUST BAR ===== -->
+<section class="trust-bar">
     <div class="container">
-        <h2>Типы <span>септиков</span></h2>
-        <div class="types-grid">
-            <div class="type-card tilt-3d reveal reveal-delay-1"><div class="tilt-shine"></div>
-                <div class="type-icon green">🏗</div>
-                <h3>Накопительные</h3>
-                <p>Герметичные емкости для сбора стоков. Подходят для дач и домов сезонного проживания. Требуют откачки ассенизатором.</p>
+        <div class="trust-items">
+            <div class="trust-item">
+                <div class="trust-icon">📊</div>
+                <div class="trust-value"><span class="counter" data-target="12">0</span>+ лет</div>
+                <div class="trust-label">на рынке</div>
             </div>
-            <div class="type-card tilt-3d reveal reveal-delay-2"><div class="tilt-shine"></div>
-                <div class="type-icon blue">♻</div>
-                <h3>С почвенной доочисткой</h3>
-                <p>Отстаивание + фильтрация через грунт. Экологично, до 95% очистки. Требуют участок под дренажное поле.</p>
+            <div class="trust-item">
+                <div class="trust-icon">🏠</div>
+                <div class="trust-value"><span class="counter" data-target="850">0</span>+</div>
+                <div class="trust-label">объектов</div>
             </div>
-            <div class="type-card tilt-3d reveal reveal-delay-3"><div class="tilt-shine"></div>
-                <div class="type-icon amber">⚙</div>
-                <h3>Станции биологической очистки</h3>
-                <p>Полный цикл переработки — до 98% очистки. Сбрасывают техническую воду прямо в канаву. Компактны и долговечны.</p>
+            <div class="trust-item">
+                <div class="trust-icon">⏱</div>
+                <div class="trust-value">1 день</div>
+                <div class="trust-label">монтаж</div>
             </div>
-            <div class="type-card tilt-3d reveal reveal-delay-4"><div class="tilt-shine"></div>
-                <div class="type-icon purple">❄</div>
-                <h3>Для высоких грунтовых вод</h3>
-                <p>Усиленные конструкции с якорением. Предотвращают всплытие при паводках. Специальные системы отвода.</p>
+            <div class="trust-item">
+                <div class="trust-icon">🛡</div>
+                <div class="trust-value"><span class="counter" data-target="5">0</span> лет</div>
+                <div class="trust-label">гарантии</div>
             </div>
         </div>
     </div>
@@ -1129,6 +1208,135 @@
     </div>
 </section>
 
+<!-- ===== GALLERY ===== -->
+<section class="section" id="gallery" style="background: #f8f9fc;">
+    <div class="container">
+        <h2>Наши <span>объекты</span></h2>
+        <div class="gallery-grid">
+            <div class="gallery-card reveal reveal-delay-1">
+                <div class="gallery-placeholder" style="background: linear-gradient(135deg, #e0f0e8, #b8e0cc);">
+                    <svg viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="40" y="40" width="120" height="80" rx="12" fill="#0d9668" opacity=".2"/>
+                        <rect x="50" y="50" width="100" height="60" rx="8" fill="#0d9668" opacity=".4"/>
+                        <text x="100" y="85" fill="#065f46" font-size="14" font-weight="600" text-anchor="middle">Монтаж</text>
+                    </svg>
+                </div>
+                <div class="gallery-info">
+                    <h4>Ул. Ленина, 45</h4>
+                    <p>Стандарт · Монтаж за 1 день</p>
+                </div>
+            </div>
+            <div class="gallery-card reveal reveal-delay-2">
+                <div class="gallery-placeholder" style="background: linear-gradient(135deg, #dbeafe, #bfdbfe);">
+                    <svg viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="40" y="40" width="120" height="80" rx="12" fill="#3b82f6" opacity=".2"/>
+                        <rect x="50" y="50" width="100" height="60" rx="8" fill="#3b82f6" opacity=".4"/>
+                        <text x="100" y="85" fill="#1d4ed8" font-size="14" font-weight="600" text-anchor="middle">Откачка</text>
+                    </svg>
+                </div>
+                <div class="gallery-info">
+                    <h4>д. Бороздино</h4>
+                    <p>Базовый · Регулярное обслуживание</p>
+                </div>
+            </div>
+            <div class="gallery-card reveal reveal-delay-3">
+                <div class="gallery-placeholder" style="background: linear-gradient(135deg, #fef3c7, #fde68a);">
+                    <svg viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="40" y="40" width="120" height="80" rx="12" fill="#d97706" opacity=".2"/>
+                        <rect x="50" y="50" width="100" height="60" rx="8" fill="#d97706" opacity=".4"/>
+                        <text x="100" y="85" fill="#b45309" font-size="14" font-weight="600" text-anchor="middle">Премиум</text>
+                    </svg>
+                </div>
+                <div class="gallery-info">
+                    <h4>п. Красный Борец</h4>
+                    <p>Премиум · Биостанция Топас</p>
+                </div>
+            </div>
+            <div class="gallery-card reveal reveal-delay-1">
+                <div class="gallery-placeholder" style="background: linear-gradient(135deg, #ede9fe, #ddd6fe);">
+                    <svg viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="40" y="40" width="120" height="80" rx="12" fill="#7c3aed" opacity=".2"/>
+                        <rect x="50" y="50" width="100" height="60" rx="8" fill="#7c3aed" opacity=".4"/>
+                        <text x="100" y="85" fill="#5b21b6" font-size="14" font-weight="600" text-anchor="middle">Ремонт</text>
+                    </svg>
+                </div>
+                <div class="gallery-info">
+                    <h4>с. Нердва</h4>
+                    <p>Стандарт · Замена компрессора</p>
+                </div>
+            </div>
+            <div class="gallery-card reveal reveal-delay-2">
+                <div class="gallery-placeholder" style="background: linear-gradient(135deg, #d1fae5, #a7f3d0);">
+                    <svg viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="40" y="40" width="120" height="80" rx="12" fill="#10b981" opacity=".2"/>
+                        <rect x="50" y="50" width="100" height="60" rx="8" fill="#10b981" opacity=".4"/>
+                        <text x="100" y="85" fill="#047857" font-size="14" font-weight="600" text-anchor="middle">Сервис</text>
+                    </svg>
+                </div>
+                <div class="gallery-info">
+                    <h4>Орёл, ул. Мира</h4>
+                    <p>Премиум · Плановое ТО</p>
+                </div>
+            </div>
+            <div class="gallery-card reveal reveal-delay-3">
+                <div class="gallery-placeholder" style="background: linear-gradient(135deg, #fce7f3, #fbcfe8);">
+                    <svg viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="40" y="40" width="120" height="80" rx="12" fill="#ec4899" opacity=".2"/>
+                        <rect x="50" y="50" width="100" height="60" rx="8" fill="#ec4899" opacity=".4"/>
+                        <text x="100" y="85" fill="#be185d" font-size="14" font-weight="600" text-anchor="middle">Дренаж</text>
+                    </svg>
+                </div>
+                <div class="gallery-info">
+                    <h4>д. Ржаница</h4>
+                    <p>Стандарт · Дренажное поле</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== REVIEWS ===== -->
+<section class="section section-dark" id="reviews">
+    <div class="container">
+        <h2>Отзывы <span>клиентов</span></h2>
+        <div class="reviews-grid">
+            <div class="review-card reveal reveal-delay-1">
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">«Заказывали монтаж септика на даче. Приехали вовремя, всё сделали за один день. Работает уже 2 года без проблем. Рекомендую!»</p>
+                <div class="review-author">
+                    <div class="review-avatar">А.С.</div>
+                    <div>
+                        <div class="review-name">Алексей Смирнов</div>
+                        <div class="review-location">д. Бороздино</div>
+                    </div>
+                </div>
+            </div>
+            <div class="review-card reveal reveal-delay-2">
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">«Профессиональный подход! Инженер всё объяснил, подобрал оптимальный вариант. Монтаж быстрый, аккуратный. Спасибо!»</p>
+                <div class="review-author">
+                    <div class="review-avatar">Е.К.</div>
+                    <div>
+                        <div class="review-name">Елена Козлова</div>
+                        <div class="review-location">Орёл, ул. Ленина</div>
+                    </div>
+                </div>
+            </div>
+            <div class="review-card reveal reveal-delay-3">
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">«Устанавливали биостанцию Топас. Всё чётко, без сюрпризов. Цена как договаривались. Уже рекомендовал соседям.»</p>
+                <div class="review-author">
+                    <div class="review-avatar">Д.М.</div>
+                    <div>
+                        <div class="review-name">Дмитрий Морозов</div>
+                        <div class="review-location">п. Красный Борец</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- ===== CALCULATOR ===== -->
 <section class="section" id="calculator">
     <div class="container">
@@ -1154,9 +1362,9 @@
                     <label for="calcType">🔧 Тип септика</label>
                     <select id="calcType">
                         <option value="auto">✨ Подобрать автоматически</option>
-                        <option value="accum">Накопительный</option>
-                        <option value="soil">С почвенной доочисткой</option>
-                        <option value="bio">Станция биоочистки</option>
+                        <option value="accum">Базовый — накопительный</option>
+                        <option value="soil">Стандарт — с почвенной доочисткой</option>
+                        <option value="bio">Премиум — биостанция</option>
                     </select>
                 </div>
                 <div class="calc-field">
@@ -1167,8 +1375,8 @@
             <button class="btn btn-primary" id="calcBtn" style="width:100%; justify-content:center;">
                 🧮 Рассчитать стоимость
             </button>
-            <div class="calc-result" id="calcResult">
-                <div class="price-note">Примерная стоимость вашего проекта:</div>
+            <div class="calc-result" id="calcResult" style="border: 2px solid #e5e7eb;">
+                <div class="price-note" style="font-size:.85rem; color:#888;">Рекомендация для вашего участка:</div>
                 <div class="price-big" id="calcPrice">0 ₽</div>
                 <div class="price-note" id="calcDesc"></div>
                 <a href="#contact" class="btn btn-primary" style="margin-top:16px; background:#fff; color:#065f46;">
@@ -1277,11 +1485,11 @@
                 <input type="text" name="name" placeholder="Ваше имя" required autocomplete="name" aria-label="Ваше имя">
                 <input type="tel" name="phone" placeholder="Номер телефона" required autocomplete="tel" pattern="[\+]?[0-9\s\-\(\)]{7,18}" title="Введите номер телефона, например: +7 (920) 819-54-02" aria-label="Номер телефона">
                 <input type="email" name="email" placeholder="Email (необязательно)" autocomplete="email" aria-label="Email">
-                <select name="type" required aria-label="Тип септика">
+                <select name="type" required aria-label="Тип септика" id="formType">
                     <option value="" disabled selected>Тип септика</option>
-                    <option value="накопительный">Накопительный</option>
-                    <option value="почвенная доочистка">С почвенной доочисткой</option>
-                    <option value="биостанция">Биологическая очистка</option>
+                    <option value="Базовый">Базовый — накопительный</option>
+                    <option value="Стандарт">Стандарт — с почвенной доочисткой</option>
+                    <option value="Премиум">Премиум — биостанция</option>
                     <option value="не знаю">Затрудняюсь выбрать</option>
                 </select>
                 <textarea name="comment" placeholder="Комментарий (адрес, количество человек, пожелания)" aria-label="Комментарий"></textarea>
@@ -1316,12 +1524,15 @@
             <div>
                 <h4 style="color:#fff; margin-bottom:8px;">Навигация</h4>
                 <p style="color:#aaa; font-size:.85rem;">
-                    <a href="#types" style="color:#aaa; display:block; margin-bottom:4px;">Типы септиков</a>
                     <a href="#advantages" style="color:#aaa; display:block; margin-bottom:4px;">Преимущества</a>
+                    <a href="#gallery" style="color:#aaa; display:block; margin-bottom:4px;">Наши работы</a>
+                    <a href="uslugi.html" style="color:#aaa; display:block; margin-bottom:4px;">Услуги</a>
                     <a href="#calculator" style="color:#aaa; display:block; margin-bottom:4px;">Калькулятор</a>
-                    <a href="#pricing" style="color:#aaa; display:block; margin-bottom:4px;">Цены</a>
-                    <a href="#faq" style="color:#aaa; display:block; margin-bottom:4px;">FAQ</a>
-                    <a href="#contact" style="color:#aaa; display:block;">Контакты</a>
+                    <a href="tseny.html" style="color:#aaa; display:block; margin-bottom:4px;">Цены</a>
+                    <a href="o-nas.html" style="color:#aaa; display:block; margin-bottom:4px;">О компании</a>
+                    <a href="#reviews" style="color:#aaa; display:block; margin-bottom:4px;">Отзывы</a>
+                    <a href="kontakty.html" style="color:#aaa; display:block; margin-bottom:4px;">Контакты</a>
+                    <a href="#faq" style="color:#aaa; display:block;">FAQ</a>
                 </p>
             </div>
         </div>
@@ -1648,9 +1859,9 @@
     const calcDesc = document.getElementById('calcDesc');
 
     const PRICES = {
-        accum: { base: 89900, perPerson: 0, name: 'Накопительный' },
-        soil: { base: 159900, perPerson: 5000, name: 'С почвенной доочисткой' },
-        bio: { base: 259900, perPerson: 8000, name: 'Станция биоочистки' }
+        accum: { base: 89900, perPerson: 0, name: 'Базовый', fullName: 'Накопительный септик', volume: '2 м³', badge: '🔧 Накопительный', desc: 'Герметичная ёмкость для сбора стоков. Идеален для дач и сезонного проживания. Требует откачки 1–2 раза в месяц.' },
+        soil: { base: 159900, perPerson: 5000, name: 'Стандарт', fullName: 'Септик с почвенной доочисткой', volume: '4 м³', badge: '♻ Трёхкамерный', desc: 'Три камеры + дренажное поле. До 95% очистки стоков. Экологично, без электричества. Для дома до 6 человек.' },
+        bio: { base: 259900, perPerson: 8000, name: 'Премиум', fullName: 'Станция биологической очистки', volume: '8 м³', badge: '⚡ Биостанция', desc: 'Полный цикл переработки — до 98% очистки. Сбрасывает техническую воду. Компактна, работает при любых грунтах.' }
     };
     const SOIL_MULT = { sand: 1.0, loam: 1.1, clay: 1.25, water: 1.35 };
     const SOIL_NAMES = { sand: 'Песчаный', loam: 'Суглинок', clay: 'Глина', water: 'Высокие УГВ' };
@@ -1674,8 +1885,21 @@
         if (dist > 10) price += (dist - 10) * 2000;
         price = Math.round(price / 100) * 100;
 
-        calcPrice.textContent = price.toLocaleString('ru-RU') + ' ₽';
-        calcDesc.innerHTML = `${p.name} · ${people} чел. · ${SOIL_NAMES[soil]} грунт · расстояние ${dist}м`;
+        // Цвет результата в зависимости от типа
+        const colors = { accum: '#4b5563', soil: '#0d9668', bio: '#d97706' };
+        const bgColors = { accum: '#f9fafb', soil: '#f0fdf4', bio: '#fffbeb' };
+        const borderColors = { accum: '#e5e7eb', soil: '#0d9668', bio: '#d97706' };
+
+        calcResult.style.background = bgColors[selectedType];
+        calcResult.style.borderColor = borderColors[selectedType];
+        calcResult.querySelector('.price-note').style.color = '#666';
+
+        document.getElementById('calcPrice').innerHTML = `<span style="color:${colors[selectedType]}">${price.toLocaleString('ru-RU')} ₽</span>`;
+        calcDesc.innerHTML = `
+            <div style="margin-bottom:8px;"><strong style="color:${colors[selectedType]}; font-size:1.1rem;">${p.badge}: ${p.fullName}</strong></div>
+            <div style="margin-bottom:6px;">📦 Объём: <strong>${p.volume}</strong> · 👥 ${people} чел. · 🌍 ${SOIL_NAMES[soil]} грунт · 📍 ${dist}м</div>
+            <div style="color:#555; font-size:.9rem;">${p.desc}</div>
+        `;
 
         calcResult.classList.add('visible');
         calcResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
