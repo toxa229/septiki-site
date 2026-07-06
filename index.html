@@ -32,6 +32,15 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><rect width='36' height='36' rx='8' fill='%230d9668'/><text x='8' y='26' font-size='22'>💧</text></svg>">
     <link rel="manifest" href="manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -190,7 +199,7 @@
                 "name": "Сколько стоит монтаж септика?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Базовый пакет от 89 900 ₽ (накопительный, до 3 чел.), Стандарт — 159 900 ₽ (с почвенной доочисткой, до 6 чел.), Премиум — 259 900 ₽ (биостанция, до 10 чел.). Точная стоимость зависит от объёма и грунта."
+                    "text": "Евролос 3 от 89 900 ₽ (накопительный, до 3 чел.), Евролос 5 — 159 900 ₽ (с почвенной доочисткой, до 6 чел.), Евролос 8 — 259 900 ₽ (биостанция, до 10 чел.). Точная стоимость зависит от объёма и грунта."
                 }
             },
             {
@@ -198,7 +207,7 @@
                 "name": "Сколько времени занимает монтаж?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Монтаж занимает 1 рабочий день. Приезжаем с техникой, устанавливаем, подключаем, запускаем — вы пользуетесь в тот же день."
+                    "text": "Монтаж занимает 1 рабочий день. Приезжаем, устанавливаем, подключаем, запускаем — вы пользуетесь в тот же день."
                 }
             }
         ]
@@ -253,12 +262,12 @@
         input, select, textarea {
             font-size: 16px !important; /* Prevent iOS zoom on focus */
         }
-        button, .btn, .nav-links a, .burger, .chat-fab, .scroll-top, .chat-send-btn, .faq-question, .tier-btn {
+        button, .btn, .nav-links a, .burger, .scroll-top, .faq-question, .tier-btn {
             min-height: 44px;
         }
         /* Safe area insets for notched phones */
         @supports (padding: max(0px)) {
-            header, .chat-fab, .chat-window, .scroll-top, footer, .toast {
+            header, .scroll-top, footer, .toast {
                 padding-left: max(12px, env(safe-area-inset-left));
                 padding-right: max(12px, env(safe-area-inset-right));
             }
@@ -433,17 +442,11 @@
             box-shadow: 0 20px 60px rgba(0,0,0,.08); text-align: center;
             position: relative; overflow: hidden;
         }
-        .hero-visual::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0;
-            height: 4px; background: linear-gradient(90deg, #0d9668, #10b981, #0d9668);
-            background-size: 200% 100%;
-            animation: gradientSlide 3s linear infinite;
-        }
         @keyframes gradientSlide {
             0% { background-position: 0% 50%; }
             100% { background-position: 200% 50%; }
         }
-        .hero-visual svg { width: 100%; max-width: 400px; height: auto; }
+        .hero-visual #threeContainer { width: 100%; max-width: 460px; height: 420px; margin: 0 auto; }
 
         /* ===== SCROLL REVEAL ===== */
         .reveal {
@@ -530,16 +533,6 @@
             transform: translateZ(10px);
         }
 
-        /* 3D glow ring on chat fab */
-        .chat-fab::before {
-            content: ''; position: absolute; inset: -4px;
-            border-radius: 50%;
-            background: conic-gradient(from 0deg, #0d9668, #10b981, #065f46, #0d9668);
-            z-index: -1;
-            animation: spin3d 3s linear infinite;
-            opacity: 0; transition: opacity .3s;
-        }
-        .chat-fab:hover::before { opacity: 1; }
         @keyframes spin3d {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
@@ -771,127 +764,6 @@
         }
         .toast.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-        /* ===== CHATBOT WIDGET ===== */
-        .chat-fab {
-            position: fixed; bottom: 28px; right: 28px;
-            width: 64px; height: 64px; border-radius: 50%;
-            background: linear-gradient(135deg, #0d9668, #065f46);
-            color: #fff; border: none; cursor: pointer;
-            box-shadow: 0 6px 24px rgba(13,150,104,.4);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.6rem; z-index: 999;
-            transition: transform .3s, box-shadow .3s;
-            animation: chatFabPulse 2s ease-in-out infinite;
-        }
-        @keyframes chatFabPulse {
-            0%, 100% { box-shadow: 0 6px 24px rgba(13,150,104,.4); }
-            50% { box-shadow: 0 6px 30px rgba(13,150,104,.6); }
-        }
-        .chat-fab:hover { transform: scale(1.08); animation: none; }
-        .chat-fab.hidden { transform: scale(0); pointer-events: none; }
-        .chat-window {
-            position: fixed; bottom: 104px; right: 28px;
-            width: 400px; max-width: calc(100vw - 32px);
-            height: 560px; max-height: calc(100vh - 140px);
-            background: #fff; border-radius: 20px;
-            box-shadow: 0 12px 48px rgba(0,0,0,.18);
-            display: flex; flex-direction: column; overflow: hidden;
-            z-index: 998; opacity: 0;
-            transform: translateY(20px) scale(.95);
-            pointer-events: none; transition: opacity .3s, transform .3s;
-        }
-        .chat-window.open {
-            opacity: 1; transform: translateY(0) scale(1); pointer-events: auto;
-        }
-        .chat-header {
-            background: linear-gradient(135deg, #0d9668, #065f46);
-            color: #fff; padding: 16px 20px;
-            display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;
-        }
-        .chat-header-left { display: flex; align-items: center; gap: 12px; }
-        .chat-avatar {
-            width: 40px; height: 40px; background: rgba(255,255,255,.2);
-            border-radius: 50%; display: flex; align-items: center;
-            justify-content: center; font-size: 1.2rem;
-        }
-        .chat-header-info h4 { font-size: .95rem; font-weight: 600; }
-        .chat-header-info span { font-size: .75rem; opacity: .8; }
-        .chat-header-actions { display: flex; gap: 8px; }
-        .chat-header-actions button {
-            background: rgba(255,255,255,.15); border: none; color: #fff;
-            width: 32px; height: 32px; border-radius: 8px; cursor: pointer;
-            font-size: .9rem; display: flex; align-items: center;
-            justify-content: center; transition: background .2s;
-        }
-        .chat-header-actions button:hover { background: rgba(255,255,255,.3); }
-        .chat-messages {
-            flex: 1; overflow-y: auto; padding: 20px;
-            display: flex; flex-direction: column; gap: 12px;
-        }
-        .chat-messages::-webkit-scrollbar { width: 5px; }
-        .chat-messages::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
-        .chat-msg {
-            max-width: 85%; padding: 12px 16px; border-radius: 16px;
-            font-size: .9rem; line-height: 1.5; animation: msgIn .3s ease;
-        }
-        @keyframes msgIn {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .chat-msg.bot {
-            background: #f0f7f3; color: #1a1a2e;
-            align-self: flex-start; border-bottom-left-radius: 4px;
-        }
-        .chat-msg.user {
-            background: linear-gradient(135deg, #0d9668, #065f46);
-            color: #fff; align-self: flex-end; border-bottom-right-radius: 4px;
-        }
-        .chat-msg.bot a { color: #0d9668; text-decoration: underline; }
-        .chat-typing {
-            align-self: flex-start; padding: 12px 18px;
-            background: #f0f7f3; border-radius: 16px;
-            border-bottom-left-radius: 4px; display: none;
-        }
-        .chat-typing.visible { display: flex; gap: 4px; align-items: center; }
-        .chat-typing span {
-            width: 7px; height: 7px; background: #0d9668;
-            border-radius: 50%; animation: typing .9s infinite;
-        }
-        .chat-typing span:nth-child(2) { animation-delay: .15s; }
-        .chat-typing span:nth-child(3) { animation-delay: .3s; }
-        @keyframes typing {
-            0%, 60%, 100% { transform: translateY(0); opacity: .4; }
-            30% { transform: translateY(-6px); opacity: 1; }
-        }
-        .chat-input-area {
-            padding: 12px 16px; border-top: 1px solid #eee;
-            display: flex; gap: 8px; align-items: flex-end;
-            flex-shrink: 0; background: #fff;
-        }
-        .chat-input-area textarea {
-            flex: 1; resize: none; border: 1px solid #e0e0e0;
-            border-radius: 12px; padding: 10px 14px; font-size: .9rem;
-            font-family: inherit; max-height: 90px; outline: none;
-            transition: border .2s; color: #1a1a2e; background: #f8f9fc;
-        }
-        .chat-input-area textarea:focus { border-color: #0d9668; }
-        .chat-send-btn {
-            width: 42px; height: 42px; border-radius: 12px;
-            background: linear-gradient(135deg, #0d9668, #065f46);
-            color: #fff; border: none; cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.1rem; flex-shrink: 0; transition: transform .2s;
-        }
-        .chat-send-btn:hover { transform: scale(1.05); }
-        .chat-send-btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
-        @media (max-width: 480px) {
-            .chat-window {
-                bottom: 0; right: 0; width: 100%;
-                height: 100%; max-height: 100vh; border-radius: 0;
-            }
-            .chat-fab { bottom: 20px; right: 20px; width: 56px; height: 56px; font-size: 1.4rem; }
-        }
-
         /* ===== CALCULATOR ===== */
         .calc-wrapper {
             background: linear-gradient(135deg, #f0f9f5 0%, #e8f5ee 100%);
@@ -921,6 +793,56 @@
         .calc-result .price-big { font-size: 2.5rem; font-weight: 800; margin: 8px 0; }
         .calc-result .price-note { font-size: .9rem; opacity: .85; }
         .calc-result .btn { margin-top: 16px; background: #fff; color: #065f46; }
+
+        /* ===== BLOG ARTICLES ===== */
+        .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 16px; }
+        .blog-card {
+            background: #fff; border-radius: 20px; overflow: hidden;
+            box-shadow: 0 2px 16px rgba(0,0,0,.06);
+            transition: transform .25s, box-shadow .25s;
+            display: flex; flex-direction: column;
+        }
+        .blog-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,.1); }
+        .blog-card-image {
+            height: 180px; display: flex; align-items: center; justify-content: center;
+            font-size: 3rem; position: relative; overflow: hidden;
+        }
+        .blog-card-image .bg-icon { font-size: 5rem; opacity: .12; position: absolute; }
+        .blog-card-body { padding: 24px 24px 20px; flex: 1; display: flex; flex-direction: column; }
+        .blog-card-tag {
+            display: inline-block; background: #e8f5ef; color: #0d9668;
+            font-size: .7rem; font-weight: 600; padding: 4px 12px; border-radius: 20px;
+            margin-bottom: 10px; text-transform: uppercase; letter-spacing: .5px;
+            align-self: flex-start;
+        }
+        .blog-card h3 { font-size: 1.1rem; margin-bottom: 8px; line-height: 1.35; }
+        .blog-card p { font-size: .88rem; color: #666; line-height: 1.5; margin-bottom: 12px; flex: 1; }
+        .blog-card .read-more {
+            background: none; border: none; color: #0d9668; font-weight: 600;
+            cursor: pointer; font-size: .85rem; padding: 0; font-family: inherit;
+            display: inline-flex; align-items: center; gap: 4px; transition: gap .2s;
+        }
+        .blog-card .read-more:hover { gap: 8px; }
+        .blog-card .read-more.open { color: #555; }
+        .blog-expanded {
+            display: none; padding: 16px 0 4px; border-top: 1px solid #eee;
+            font-size: .88rem; color: #444; line-height: 1.65;
+        }
+        .blog-expanded.visible { display: block; animation: fadeIn .3s ease; }
+        .blog-expanded ul { margin: 8px 0; padding-left: 20px; list-style: disc; }
+        .blog-expanded ul li { margin-bottom: 4px; color: #555; }
+        .blog-expanded strong { color: #0d9668; }
+        .blog-expanded .cta-line {
+            margin-top: 12px; padding-top: 12px; border-top: 1px dashed #ddd;
+            font-weight: 600; color: #333;
+        }
+        .blog-expanded .cta-line a { color: #0d9668; text-decoration: underline; }
+        .blog-card-footer { margin-top: auto; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+        @media (max-width: 900px) {
+            .blog-grid { grid-template-columns: 1fr; gap: 20px; }
+            .blog-card-image { height: 140px; }
+        }
 
         /* ===== SCROLL TO TOP ===== */
         .scroll-top {
@@ -1036,7 +958,6 @@
         /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
             .hero::before, .hero::after,
-            .hero-visual::before,
             .logo-icon { animation: none; }
             .hero-grid { grid-template-columns: 1fr; gap: 40px; }
             .hero-visual { order: -1; padding: 24px; }
@@ -1069,11 +990,6 @@
             .price-card ul li { font-size: .9rem; }
         }
         @media (max-width: 480px) {
-            .chat-window {
-                bottom: 0; right: 0; width: 100%;
-                height: 100%; max-height: 100vh; border-radius: 0;
-            }
-            .chat-fab { bottom: 16px; right: 16px; width: 52px; height: 52px; font-size: 1.3rem; }
             .btn { min-height: 48px; padding: 12px 24px; font-size: .95rem; }
             .hero { padding: 110px 0 40px; }
             .hero h1 { font-size: 1.8rem; }
@@ -1123,14 +1039,95 @@
             .price-card { padding: 20px 14px; }
             .price-card .price { font-size: 1.7rem; }
             .calc-wrapper { padding: 16px 12px; }
-            .chat-msg { font-size: .85rem; padding: 10px 14px; }
         }
+
+        /* ===== FLOATING PHONE BUTTON ===== */
+        .phone-fab {
+            position: fixed; bottom: 96px; left: 24px; z-index: 9997;
+            width: 56px; height: 56px; border-radius: 50%;
+            background: #22c55e; border: none; cursor: pointer;
+            box-shadow: 0 4px 20px rgba(34,197,94,.45);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 26px; color: #fff;
+            transition: transform .2s, box-shadow .2s;
+            animation: phonePulse 2s ease-in-out infinite;
+            text-decoration: none;
+        }
+        .phone-fab:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(34,197,94,.55); animation: none; }
+        @keyframes phonePulse {
+            0%, 100% { box-shadow: 0 4px 20px rgba(34,197,94,.45); }
+            50% { box-shadow: 0 4px 30px rgba(34,197,94,.65); }
+        }
+        .phone-fab-tooltip {
+            position: absolute; left: 66px; top: 50%; transform: translateY(-50%);
+            background: #fff; color: #1a1a2e; font-size: 13px; font-weight: 500;
+            padding: 8px 14px; border-radius: 10px; white-space: nowrap;
+            box-shadow: 0 2px 12px rgba(0,0,0,.12);
+            pointer-events: none;
+        }
+        .phone-fab-tooltip::before {
+            content: ''; position: absolute; left: -6px; top: 50%; transform: translateY(-50%);
+            border: 6px solid transparent; border-right-color: #fff;
+        }
+
+        /* ===== PROMO BAR ===== */
+        .promo-bar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
+            background: linear-gradient(90deg, #f59e0b, #f97316);
+            color: #fff; text-align: center; padding: 8px 16px;
+            font-size: 13px; font-weight: 600; display: flex;
+            align-items: center; justify-content: center; gap: 8px;
+            transition: transform .3s ease;
+            cursor: pointer;
+        }
+        .promo-bar.dismissed { transform: translateY(-100%); }
+        .promo-bar span { opacity: .9; font-weight: 400; }
+        .promo-bar .promo-close {
+            background: rgba(255,255,255,.2); border: none; color: #fff;
+            border-radius: 50%; width: 22px; height: 22px;
+            cursor: pointer; font-size: 12px; display: flex;
+            align-items: center; justify-content: center;
+            margin-left: 8px; flex-shrink: 0;
+        }
+        .promo-bar .promo-close:hover { background: rgba(255,255,255,.35); }
+
+        /* Add padding-top for promo bar if present */
+        body.promo-shown { padding-top: 38px; }
+        body.promo-shown header { top: 38px; }
+
+        @media (max-width: 480px) {
+            .promo-bar { font-size: 11px; padding: 6px 10px; }
+            body.promo-shown { padding-top: 32px; }
+            body.promo-shown header { top: 32px; }
+            .phone-fab { width: 48px; height: 48px; font-size: 22px; bottom: 84px; left: 16px; }
+            .phone-fab-tooltip { display: none; }
+        }
+        /* Fix for initial load — no layout shift */
+        .promo-loading .promo-bar-wrapper { height: 0; overflow: visible; }
     </style>
     <!-- Vercel Analytics & Speed Insights -->
     <script defer src="/_vercel/insights/script.js"></script>
     <script defer src="/_vercel/speed-insights/script.js"></script>
 </head>
 <body>
+
+<!-- Акционная плашка -->
+<div id="promoBar" class="promo-bar" onclick="dismissPromo()">
+    🔥 <strong>Летняя акция:</strong> скидка 15% на монтаж септика <span>|</span> Бесплатный выезд инженера
+    <button class="promo-close" onclick="event.stopPropagation(); dismissPromo()" aria-label="Закрыть">✕</button>
+</div>
+<script>
+    (function() {
+        var dismissed = localStorage.getItem('promoDismissed');
+        if (!dismissed) { document.body.classList.add('promo-shown'); }
+        else { document.getElementById('promoBar').classList.add('dismissed'); }
+    })();
+    window.dismissPromo = function() {
+        document.getElementById('promoBar').classList.add('dismissed');
+        document.body.classList.remove('promo-shown');
+        localStorage.setItem('promoDismissed', '1');
+    };
+</script>
 
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PMKR6KLZ" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -1152,6 +1149,7 @@
             <li><a href="#calculator">Калькулятор</a></li>
             <li><a href="#pricing">Цены</a></li>
             <li><a href="#reviews">Отзывы</a></li>
+            <li><a href="#blog">Статьи</a></li>
             <li><a href="#contact" class="btn btn-primary">Заказать звонок</a></li>
         </ul>
         <button class="burger" id="burgerBtn" aria-label="Меню">
@@ -1165,216 +1163,13 @@
 <section class="hero" id="hero">
     <div class="container hero-grid">
         <div class="hero-text-3d">
-            <h1>Автономная <span>канализация</span> для вашего дома</h1>
+            <h1>Септики <span>Евролос</span> под ключ в Орле</h1>
             <p>
-                Поставляем и монтируем септики под ключ.
-                Гарантия 5 лет, сервисное обслуживание и полная документация.
+                Поставляем и монтируем септики <strong>Евролос</strong>, с гарантией.
             </p>
-            <div class="hero-stats">
-                <div class="hero-stat">
-                    <h4><span class="counter" data-target="12">0</span>+ лет</h4>
-                    <p>на рынке</p>
-                </div>
-                <div class="hero-stat">
-                    <h4><span class="counter" data-target="850">0</span>+</h4>
-                    <p>объектов</p>
-                </div>
-                <div class="hero-stat">
-                    <h4><span class="counter" data-target="5">0</span> лет</h4>
-                    <p>гарантии</p>
-                </div>
-            </div>
-        </div>
+</div>
         <div class="hero-visual" id="heroVisual">
-            <svg viewBox="0 0 500 420" fill="none" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;">
-                <defs>
-                    <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stop-color="#f0faf4"/>
-                        <stop offset="100%" stop-color="#e4f0e8"/>
-                    </linearGradient>
-                    <linearGradient id="frontGrad" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stop-color="#f8faf8"/>
-                        <stop offset="40%" stop-color="#edf2ed"/>
-                        <stop offset="100%" stop-color="#dce6dc"/>
-                    </linearGradient>
-                    <linearGradient id="topGrad" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stop-color="#ffffff"/>
-                        <stop offset="100%" stop-color="#eef4ee"/>
-                    </linearGradient>
-                    <linearGradient id="sideGrad" x1="0" y1="0" x2="1" y2="0">
-                        <stop offset="0%" stop-color="#d4e0d4"/>
-                        <stop offset="100%" stop-color="#bccabc"/>
-                    </linearGradient>
-                    <linearGradient id="hatchGrad" x1="0" y1="0" x2="1" y2="1">
-                        <stop offset="0%" stop-color="#12d48e"/>
-                        <stop offset="100%" stop-color="#0a8a5a"/>
-                    </linearGradient>
-                    <linearGradient id="pipeGrad" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stop-color="#b0b8b0"/>
-                        <stop offset="100%" stop-color="#8a948a"/>
-                    </linearGradient>
-                    <linearGradient id="waterGrad" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stop-color="#4fa3e0" stop-opacity=".5"/>
-                        <stop offset="100%" stop-color="#2a7fc0" stop-opacity=".6"/>
-                    </linearGradient>
-                    <filter id="shadow" x="-20%" y="-10%" width="140%" height="140%">
-                        <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#0d9668" flood-opacity=".15"/>
-                    </filter>
-                    <filter id="hatchShadow">
-                        <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity=".15"/>
-                    </filter>
-                </defs>
-
-                <!-- Background -->
-                <rect width="500" height="420" rx="24" fill="url(#skyGrad)"/>
-
-                <!-- Ground shadow -->
-                <ellipse cx="255" cy="370" rx="170" ry="28" fill="#0d9668" opacity=".08"/>
-                <ellipse cx="255" cy="372" rx="120" ry="16" fill="#0d9668" opacity=".06"/>
-
-                <!-- Decorative ground line -->
-                <path d="M60 370 Q160 355 260 365 Q360 375 440 360" stroke="#0d9668" stroke-opacity=".12" stroke-width="2" fill="none"/>
-                <path d="M70 380 Q170 365 270 375 Q370 385 430 370" stroke="#0d9668" stroke-opacity=".08" stroke-width="1.5" fill="none"/>
-
-                <!-- === RIGHT SIDE FACE === -->
-                <path d="M355,155 L355,330 L290,278 L290,103 Z"
-                      fill="url(#sideGrad)" stroke="#b0c0b0" stroke-width="1.2" stroke-linejoin="round"/>
-
-                <!-- Side corrugation ribs -->
-                <line x1="355" y1="180" x2="290" y2="128" stroke="#c4d0c4" stroke-width="1" opacity=".6"/>
-                <line x1="355" y1="205" x2="290" y2="153" stroke="#c4d0c4" stroke-width="1" opacity=".6"/>
-                <line x1="355" y1="230" x2="290" y2="178" stroke="#c4d0c4" stroke-width="1" opacity=".6"/>
-                <line x1="355" y1="255" x2="290" y2="203" stroke="#c4d0c4" stroke-width="1" opacity=".6"/>
-                <line x1="355" y1="280" x2="290" y2="228" stroke="#c4d0c4" stroke-width="1" opacity=".6"/>
-                <line x1="355" y1="305" x2="290" y2="253" stroke="#c4d0c4" stroke-width="1" opacity=".6"/>
-
-                <!-- === TOP FACE === -->
-                <path d="M130,155 L355,155 L290,103 L65,103 Z"
-                      fill="url(#topGrad)" stroke="#c8d4c8" stroke-width="1.2" stroke-linejoin="round"/>
-
-                <!-- === FRONT FACE === -->
-                <rect x="130" y="155" width="225" height="175" rx="10"
-                      fill="url(#frontGrad)" stroke="#bcc8bc" stroke-width="1.5" filter="url(#shadow)"/>
-
-                <!-- Front corrugation ribs -->
-                <line x1="140" y1="185" x2="350" y2="185" stroke="#e0e8e0" stroke-width="1" opacity=".5"/>
-                <line x1="140" y1="215" x2="350" y2="215" stroke="#e0e8e0" stroke-width="1" opacity=".5"/>
-                <line x1="140" y1="245" x2="350" y2="245" stroke="#e0e8e0" stroke-width="1" opacity=".5"/>
-                <line x1="140" y1="275" x2="350" y2="275" stroke="#e0e8e0" stroke-width="1" opacity=".5"/>
-                <line x1="140" y1="305" x2="350" y2="305" stroke="#e0e8e0" stroke-width="1" opacity=".5"/>
-
-                <!-- === WATER LEVEL INDICATOR (strip on front) === -->
-                <rect x="340" y="175" width="8" height="100" rx="4" fill="#e8f0e8" stroke="#d0dcd0" stroke-width="1"/>
-                <rect x="341" y="195" width="6" height="80" rx="3" fill="url(#waterGrad)"/>
-                <!-- Level markers -->
-                <line x1="336" y1="195" x2="352" y2="195" stroke="#999" stroke-width="1"/>
-                <line x1="336" y1="225" x2="352" y2="225" stroke="#999" stroke-width="1"/>
-                <line x1="336" y1="255" x2="352" y2="255" stroke="#999" stroke-width="1"/>
-                <text x="336" y="190" fill="#888" font-size="8" text-anchor="end">max</text>
-                <text x="336" y="268" fill="#888" font-size="8" text-anchor="end">min</text>
-
-                <!-- === HATCH 1 (left) === -->
-                <g filter="url(#hatchShadow)">
-                    <ellipse cx="175" cy="135" rx="36" ry="18" fill="url(#hatchGrad)" stroke="#0a8a5a" stroke-width="2"/>
-                    <ellipse cx="175" cy="135" rx="26" ry="13" fill="#0fbd80" opacity=".6"/>
-                    <ellipse cx="175" cy="135" rx="18" ry="9" fill="#12d48e" opacity=".3"/>
-                    <!-- Hatch handle -->
-                    <rect x="168" y="131" width="14" height="4" rx="2" fill="#08704a" opacity=".7"/>
-                    <!-- Hatch bolt -->
-                    <circle cx="175" cy="135" r="2.5" fill="#08704a" opacity=".5"/>
-                </g>
-                <text x="175" y="160" fill="#555" font-size="9" text-anchor="middle">камера 1</text>
-
-                <!-- === HATCH 2 (center) === -->
-                <g filter="url(#hatchShadow)">
-                    <ellipse cx="255" cy="130" rx="36" ry="18" fill="url(#hatchGrad)" stroke="#0a8a5a" stroke-width="2"/>
-                    <ellipse cx="255" cy="130" rx="26" ry="13" fill="#0fbd80" opacity=".6"/>
-                    <ellipse cx="255" cy="130" rx="18" ry="9" fill="#12d48e" opacity=".3"/>
-                    <rect x="248" y="126" width="14" height="4" rx="2" fill="#08704a" opacity=".7"/>
-                    <circle cx="255" cy="130" r="2.5" fill="#08704a" opacity=".5"/>
-                </g>
-                <text x="255" y="155" fill="#555" font-size="9" text-anchor="middle">камера 2</text>
-
-                <!-- === HATCH 3 (right, slightly behind) === -->
-                <g filter="url(#hatchShadow)">
-                    <ellipse cx="325" cy="125" rx="30" ry="15" fill="url(#hatchGrad)" stroke="#0a8a5a" stroke-width="2"/>
-                    <ellipse cx="325" cy="125" rx="22" ry="11" fill="#0fbd80" opacity=".6"/>
-                    <ellipse cx="325" cy="125" rx="15" ry="7" fill="#12d48e" opacity=".3"/>
-                    <rect x="319" y="121" width="12" height="4" rx="2" fill="#08704a" opacity=".7"/>
-                    <circle cx="325" cy="125" r="2.5" fill="#08704a" opacity=".5"/>
-                </g>
-                <text x="325" y="150" fill="#555" font-size="9" text-anchor="middle">камера 3</text>
-
-                <!-- === INLET PIPE (left) === -->
-                <g>
-                    <!-- Pipe body -->
-                    <rect x="55" y="230" width="80" height="22" rx="4" fill="url(#pipeGrad)" stroke="#7a847a" stroke-width="1.5"/>
-                    <!-- Flange -->
-                    <rect x="120" y="226" width="12" height="30" rx="2" fill="#9aa69a" stroke="#7a847a" stroke-width="1"/>
-                    <!-- Pipe cap -->
-                    <ellipse cx="55" cy="241" rx="6" ry="12" fill="#9aa69a" stroke="#7a847a" stroke-width="1"/>
-                    <!-- Arrow -->
-                    <path d="M60 241 L75 241" stroke="#0d9668" stroke-width="2" stroke-linecap="round"/>
-                    <path d="M68 236 L75 241 L68 246" stroke="#0d9668" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                    <text x="62" y="222" fill="#666" font-size="10">приток</text>
-                </g>
-
-                <!-- === OUTLET PIPE (right, going back) === -->
-                <g>
-                    <rect x="350" y="220" width="70" height="20" rx="4" fill="url(#pipeGrad)" stroke="#7a847a" stroke-width="1.5"/>
-                    <rect x="345" y="217" width="12" height="26" rx="2" fill="#9aa69a" stroke="#7a847a" stroke-width="1"/>
-                    <path d="M420 230 L435 223" stroke="#0d9668" stroke-width="2" stroke-linecap="round"/>
-                    <path d="M425 226 L435 223 L430 233" stroke="#0d9668" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                    <text x="360" y="214" fill="#666" font-size="10">выход</text>
-                </g>
-
-                <!-- === BRAND LABEL "ЕВРОЛОС 3" === -->
-                <g>
-                    <rect x="170" y="280" rx="8" width="145" height="36" fill="#0d9668" opacity=".9"/>
-                    <text x="242" y="298" fill="white" font-size="16" font-weight="800" text-anchor="middle" letter-spacing="2">ЕВРОЛОС 3</text>
-                    <rect x="170" y="316" width="145" height="2" fill="#0d9668" opacity=".15"/>
-                    <text x="242" y="326" fill="#666" font-size="9" text-anchor="middle">трёхкамерный септик</text>
-                </g>
-
-                <!-- === DIMENSION ARROWS === -->
-                <!-- Height -->
-                <line x1="115" y1="160" x2="115" y2="325" stroke="#aaa" stroke-width="1" stroke-dasharray="3,3"/>
-                <path d="M110 165 L115 155 L120 165" stroke="#aaa" stroke-width="1" fill="none"/>
-                <path d="M110 320 L115 330 L120 320" stroke="#aaa" stroke-width="1" fill="none"/>
-                <text x="108" y="248" fill="#888" font-size="9" text-anchor="middle" transform="rotate(-90,108,248)">1500 мм</text>
-
-                <!-- Width -->
-                <line x1="135" y1="340" x2="350" y2="340" stroke="#aaa" stroke-width="1" stroke-dasharray="3,3"/>
-                <path d="M135 335 L135 345" stroke="#aaa" stroke-width="1"/>
-                <path d="M350 335 L350 345" stroke="#aaa" stroke-width="1"/>
-                <text x="242" y="352" fill="#888" font-size="9" text-anchor="middle">2360 мм</text>
-
-                <!-- === FLOATING 3D ANNOTATIONS === -->
-                <g opacity=".6">
-                    <!-- Material badge -->
-                    <rect x="40" y="70" width="95" height="22" rx="11" fill="#e8f0e8" stroke="#0d9668" stroke-width="1"/>
-                    <text x="87" y="84" fill="#0d9668" font-size="9" font-weight="600" text-anchor="middle">ПНД 10 мм</text>
-
-                    <!-- Volume badge -->
-                    <rect x="370" y="75" width="90" height="22" rx="11" fill="#e8f0e8" stroke="#0d9668" stroke-width="1"/>
-                    <text x="415" y="89" fill="#0d9668" font-size="9" font-weight="600" text-anchor="middle">3.8 м³</text>
-                </g>
-
-                <!-- === PRODUCT BADGE === -->
-                <g transform="translate(390, 320)">
-                    <rect x="-55" y="-20" width="110" height="40" rx="20" fill="white" stroke="#0d9668" stroke-width="1.5" filter="url(#shadow)" opacity=".95"/>
-                    <text x="0" y="-2" fill="#0d9668" font-size="11" font-weight="700" text-anchor="middle">Сделано в</text>
-                    <text x="0" y="12" fill="#0d9668" font-size="10" font-weight="700" text-anchor="middle">России 🇷🇺</text>
-                </g>
-
-                <!-- === STATUS LIGHTS === -->
-                <g>
-                    <circle cx="355" cy="165" r="4" fill="#4caf50" opacity=".9">
-                        <animate attributeName="opacity" values=".9;.4;.9" dur="2s" repeatCount="indefinite"/>
-                    </circle>
-                    <text x="365" y="168" fill="#666" font-size="8">работает</text>
-                </g>
-            </svg>
+            <img id="threeContainer" src="grunt.png" alt="GRUNT" style="width:100%;max-width:460px;height:420px;object-fit:contain;border-radius:12px;display:block;margin:0 auto;background:#fff;">
         </div>
     </div>
 </section>
@@ -1386,18 +1181,18 @@
         <div class="advantages-grid">
             <div class="adv-card tilt-3d reveal reveal-delay-1"><div class="tilt-shine"></div>
                 <div class="icon">📐</div>
-                <h3>Индивидуальный проект</h3>
-                <p>Учитываем тип грунта, УГВ, количество проживающих и бюджет</p>
+                <h3>Индивидуальный расчет</h3>
+                <p>УГВ, количество проживающих и бюджет</p>
             </div>
             <div class="adv-card reveal reveal-delay-2">
                 <div class="icon">🏆</div>
-                <h3>Сертифицированные материалы</h3>
-                <p>Работаем только с проверенными брендами — Топас, Юнилос, Тверь</p>
+                <h3>Евролос — заводское качество</h3>
+                <p>Корпус ПНД 10 мм — не трескается зимой и не гниёт, служит 30+ лет</p>
             </div>
             <div class="adv-card reveal reveal-delay-3">
                 <div class="icon">🚚</div>
                 <h3>Монтаж за 1 день</h3>
-                <p>Приезжаем с техникой, устанавливаем, подключаем — вы пользуетесь</p>
+                <p>Приезжаем, устанавливаем, подключаем — вы пользуетесь</p>
             </div>
             <div class="adv-card reveal reveal-delay-4">
                 <div class="icon">🛡</div>
@@ -1467,7 +1262,7 @@
                 </div>
                 <div class="gallery-info">
                     <h4>Ул. Ленина, 45</h4>
-                    <p>Стандарт · Монтаж за 1 день</p>
+                    <p>Евролос 5 · Монтаж за 1 день</p>
                 </div>
             </div>
             <div class="gallery-card reveal reveal-delay-2">
@@ -1480,7 +1275,7 @@
                 </div>
                 <div class="gallery-info">
                     <h4>д. Бороздино</h4>
-                    <p>Базовый · Регулярное обслуживание</p>
+                    <p>Евролос 3 · Регулярное обслуживание</p>
                 </div>
             </div>
             <div class="gallery-card reveal reveal-delay-3">
@@ -1488,12 +1283,12 @@
                     <svg viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect x="40" y="40" width="120" height="80" rx="12" fill="#d97706" opacity=".2"/>
                         <rect x="50" y="50" width="100" height="60" rx="8" fill="#d97706" opacity=".4"/>
-                        <text x="100" y="85" fill="#b45309" font-size="14" font-weight="600" text-anchor="middle">Премиум</text>
+                        <text x="100" y="85" fill="#b45309" font-size="14" font-weight="600" text-anchor="middle">Евролос 8</text>
                     </svg>
                 </div>
                 <div class="gallery-info">
                     <h4>п. Красный Борец</h4>
-                    <p>Премиум · Биостанция Топас</p>
+                    <p>Евролос 8 · Биостанция</p>
                 </div>
             </div>
             <div class="gallery-card reveal reveal-delay-1">
@@ -1506,7 +1301,7 @@
                 </div>
                 <div class="gallery-info">
                     <h4>с. Нердва</h4>
-                    <p>Стандарт · Замена компрессора</p>
+                    <p>Евролос 5 · Замена компрессора</p>
                 </div>
             </div>
             <div class="gallery-card reveal reveal-delay-2">
@@ -1519,7 +1314,7 @@
                 </div>
                 <div class="gallery-info">
                     <h4>Орёл, ул. Мира</h4>
-                    <p>Премиум · Плановое ТО</p>
+                    <p>Евролос 8 · Плановое ТО</p>
                 </div>
             </div>
             <div class="gallery-card reveal reveal-delay-3">
@@ -1532,7 +1327,7 @@
                 </div>
                 <div class="gallery-info">
                     <h4>д. Ржаница</h4>
-                    <p>Стандарт · Дренажное поле</p>
+                    <p>Евролос 5 · Дренажное поле</p>
                 </div>
             </div>
         </div>
@@ -1568,7 +1363,7 @@
             </div>
             <div class="review-card reveal reveal-delay-3">
                 <div class="review-stars">★★★★★</div>
-                <p class="review-text">«Устанавливали биостанцию Топас. Всё чётко, без сюрпризов. Цена как договаривались. Уже рекомендовал соседям.»</p>
+                <p class="review-text">«Ставили Евролос 8 на участок. Всё чётко, без сюрпризов. Цена как договаривались. Уже рекомендовал соседям.»</p>
                 <div class="review-author">
                     <div class="review-avatar">Д.М.</div>
                     <div>
@@ -1606,9 +1401,9 @@
                     <label for="calcType">🔧 Тип септика</label>
                     <select id="calcType">
                         <option value="auto">✨ Подобрать автоматически</option>
-                        <option value="accum">Базовый — накопительный</option>
-                        <option value="soil">Стандарт — с почвенной доочисткой</option>
-                        <option value="bio">Премиум — биостанция</option>
+                        <option value="accum">Евролос 3 — накопительный</option>
+                        <option value="soil">Евролос 5 — с почвенной доочисткой</option>
+                        <option value="bio">Евролос 8 — биостанция</option>
                     </select>
                 </div>
                 <div class="calc-field">
@@ -1635,9 +1430,17 @@
 <section class="section section-dark" id="pricing">
     <div class="container">
         <h2>Стоимость <span>под ключ</span></h2>
+        <div style="text-align:center; margin-bottom:12px;">
+            <span style="background:#f59e0b; color:#fff; padding:6px 18px; border-radius:20px; font-size:13px; font-weight:600;">
+                🔥 Скидка 15% на монтаж до конца июля
+            </span>
+            <span style="display:inline-block; margin-left:12px; background:#0d9668; color:#fff; padding:6px 18px; border-radius:20px; font-size:13px; font-weight:600;">
+                🆓 Бесплатный выезд инженера
+            </span>
+        </div>
         <div class="pricing-grid">
             <div class="price-card tilt-3d reveal reveal-delay-1"><div class="tilt-shine"></div>
-                <h3>Базовый</h3>
+                <h3>Евролос 3</h3>
                 <div class="price">89 900 <small>₽</small></div>
                 <p style="color:#888; font-size:.9rem;">Для дачи · до 3 человек</p>
                 <ul>
@@ -1649,7 +1452,7 @@
                 <a href="#contact" class="btn btn-outline" style="width:100%; justify-content:center;">Выбрать</a>
             </div>
             <div class="price-card featured tilt-3d reveal reveal-delay-2"><div class="tilt-shine"></div>
-                <h3>Стандарт</h3>
+                <h3>Евролос 5</h3>
                 <div class="price">159 900 <small>₽</small></div>
                 <p style="color:#888; font-size:.9rem;">Для дома · до 6 человек</p>
                 <ul>
@@ -1663,7 +1466,7 @@
                 <a href="#contact" class="btn btn-primary" style="width:100%; justify-content:center;">Выбрать</a>
             </div>
             <div class="price-card tilt-3d reveal reveal-delay-3"><div class="tilt-shine"></div>
-                <h3>Премиум</h3>
+                <h3>Евролос 8</h3>
                 <div class="price">259 900 <small>₽</small></div>
                 <p style="color:#888; font-size:.9rem;">Для коттеджа · до 10 человек</p>
                 <ul>
@@ -1731,9 +1534,9 @@
                 <input type="email" name="email" placeholder="Email (необязательно)" autocomplete="email" aria-label="Email">
                 <select name="type" required aria-label="Тип септика" id="formType">
                     <option value="" disabled selected>Тип септика</option>
-                    <option value="Базовый">Базовый — накопительный</option>
-                    <option value="Стандарт">Стандарт — с почвенной доочисткой</option>
-                    <option value="Премиум">Премиум — биостанция</option>
+                    <option value="Евролос 3">Евролос 3 — накопительный</option>
+                    <option value="Евролос 5">Евролос 5 — с почвенной доочисткой</option>
+                    <option value="Евролос 8">Евролос 8 — биостанция</option>
                     <option value="не знаю">Затрудняюсь выбрать</option>
                 </select>
                 <textarea name="comment" placeholder="Комментарий (адрес, количество человек, пожелания)" aria-label="Комментарий"></textarea>
@@ -1746,6 +1549,106 @@
     </div>
 </section>
 </main>
+
+<!-- ===== БЛОГ ===== -->
+<section class="section" id="blog" style="background: #f0f9f5;">
+    <div class="container">
+        <h2>Полезные <span>статьи</span></h2>
+        <div class="blog-grid">
+
+            <!-- Пост 1: Мифы -->
+            <div class="blog-card">
+                <div class="blog-card-image" style="background: linear-gradient(135deg, #e8f5ef, #d0ede0);">
+                    <span class="bg-icon">🏗️</span>
+                    <span style="font-size: 3rem; filter: drop-shadow(0 2px 4px rgba(0,0,0,.08));">💰</span>
+                </div>
+                <div class="blog-card-body">
+                    <span class="blog-card-tag">Разрушение мифов</span>
+                    <h3>«Бетонные кольца — это дёшево»? Считаем реальные деньги за 5 лет</h3>
+                    <p>Вы когда-нибудь считали, во сколько на самом деле обходится выгребная яма из колец? Первый год — всё отлично. А дальше начинается...</p>
+                    <div class="blog-expanded" id="blog1">
+                        <strong>Год первый.</strong> Всё отлично. Вода уходит, запах терпимый. Вы рады, что сэкономили 40 тысяч.<br><br>
+                        <strong>Год 2–3.</strong> Швы заиливаются. Вода уходит всё хуже. Появляется запах. Ассенизатор — 2 500 ₽ за откачку, уже 2 раза в месяц.<br><br>
+                        <strong>Год 5.</strong> Кольца сместило морозом. В яму попала верховодка. Участок пахнет болотом. Откачка — еженедельно.<br><br>
+                        <strong>Считаем за 5 лет:</strong>
+                        <ul>
+                            <li>Кольца с монтажом — ~60 000 ₽</li>
+                            <li>Откачка — 2 500 ₽ × 24 × 5 = <strong>300 000 ₽</strong></li>
+                            <li>Испорченный отдых, запах, нервы — бесценно</li>
+                        </ul>
+                        <strong>Итого: 360 000 ₽.</strong> А проблема осталась.<br><br>
+                        Современная биостанция <strong>Евролос</strong> под ключ — от 89 900 ₽. Никакого запаха. Откачка раз в 1–2 года. Срок службы — 30+ лет. Окупается за 3 года.<br>
+                        <div class="cta-line">👍 Хотите посчитать ваш случай? <a href="#" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});return false;">Оставьте заявку</a> на бесплатный расчёт.</div>
+                    </div>
+                    <div class="blog-card-footer">
+                        <button class="read-more" onclick="toggleBlog(this, 'blog1')">Читать далее →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Пост 2: Кейс -->
+            <div class="blog-card">
+                <div class="blog-card-image" style="background: linear-gradient(135deg, #dbeafe, #bfdbfe);">
+                    <span class="bg-icon">🏡</span>
+                    <span style="font-size: 3rem; filter: drop-shadow(0 2px 4px rgba(0,0,0,.08));">🌊</span>
+                </div>
+                <div class="blog-card-body">
+                    <span class="blog-card-tag">Кейс клиента</span>
+                    <h3>Участок в низине, глина, высокие воды — у соседей всё плывёт, а у нас работает</h3>
+                    <p>История нашего клиента из Орловского района. Дом на 5 человек, круглогодичное проживание. До нас пробовали бетонные кольца — весной всплыли...</p>
+                    <div class="blog-expanded" id="blog2">
+                        <strong>Вводные:</strong> Участок в низине, глина, грунтовые воды выше 40 см весной. Дом на 5 человек. До нас пробовали кольца — весной всплыли, пошёл запах.<br><br>
+                        <strong>Что сделали мы:</strong><br><br>
+                        <strong>1. Бесплатный выезд инженера</strong> — замерили УГВ, оценили грунт, выяснили: нужна станция с принудительным отводом.<br><br>
+                        <strong>2. Подобрали Евролос 5</strong> — работает при любых грунтах, принудительный сброс решает проблему высоких вод.<br><br>
+                        <strong>3. Монтаж за 1 день</strong> — котлован, якорение к бетонной плите (чтобы не всплыла), подключение, пусконаладка.<br><br>
+                        <strong>Результат:</strong> Прошло 2 года. Весной, когда у соседей участок стоял под водой — у клиента канализация работала как часы. Ни запаха, ни сбоев.<br>
+                        <div class="cta-line">🌿 Если весной вода стоит на участке — не рискуйте. <a href="#" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});return false;">Запишитесь на бесплатный замер</a> — посмотрим и предложим решение, которое будет работать.</div>
+                    </div>
+                    <div class="blog-card-footer">
+                        <button class="read-more" onclick="toggleBlog(this, 'blog2')">Читать далее →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Пост 3: Скрытые расходы -->
+            <div class="blog-card">
+                <div class="blog-card-image" style="background: linear-gradient(135deg, #fef3c7, #fde68a);">
+                    <span class="bg-icon">🔍</span>
+                    <span style="font-size: 3rem; filter: drop-shadow(0 2px 4px rgba(0,0,0,.08));">📋</span>
+                </div>
+                <div class="blog-card-body">
+                    <span class="blog-card-tag">Чек-лист</span>
+                    <h3>3 способа обмана при продаже септиков. Как компании занижают смету</h3>
+                    <p>Мы работаем в Орле 12 лет. Каждый сезон приходят клиенты с одной болью: назвали цену 90 000 ₽, а по факту вышло 180 000 ₽. Как так?</p>
+                    <div class="blog-expanded" id="blog3">
+                        <strong>❌ Способ 1: «Стоимость оборудования без монтажа»</strong><br>
+                        Вам говорят «септик за 59 000 ₽», а монтаж стоит ещё столько же. Плюс доставка, трубы, песок. Итого уже 130 000+.<br><br>
+                        <strong>❌ Способ 2: «Типовой проект» под любые грунты</strong><br>
+                        Обещают одну цену. На объекте: «ой, у вас же глина — работы на 30% сложнее». Цена растёт, а котлован уже выкопан.<br><br>
+                        <strong>❌ Способ 3: «А трубы не входят»</strong><br>
+                        Всплывают допы: прокладка до дома — 15 000, обратная засыпка — 10 000, электричество — 8 000. Смета растёт как снежный ком.<br><br>
+                        <strong>Как считаем мы:</strong> ✅ Фиксированная цена под ключ<br>✅ Бесплатный выезд — смотрим грунт до начала работ<br>✅ Прозрачная смета по пунктам<br>✅ Цена не растёт — что согласовали, то и платите<br><br>
+                        <strong>Чек-лист (сохраните):</strong>
+                        <ul>
+                            <li>☐ Попросите смету с разбивкой по работам</li>
+                            <li>☐ Уточните, входит ли доставка</li>
+                            <li>☐ Тип грунта учтён в цене?</li>
+                            <li>☐ Гарантия закреплена в договоре?</li>
+                            <li>☐ Выезд инженера бесплатный?</li>
+                        </ul>
+                        У нас все 5 пунктов — ✅.<br>
+                        <div class="cta-line">📋 <a href="#" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});return false;">Оставьте заявку</a> — получите честную смету на ваш участок. Бесплатно.</div>
+                    </div>
+                    <div class="blog-card-footer">
+                        <button class="read-more" onclick="toggleBlog(this, 'blog3')">Читать далее →</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
 
 <!-- ===== FOOTER ===== -->
 <footer itemscope itemtype="https://schema.org/Organization">
@@ -1775,6 +1678,7 @@
                     <a href="tseny.html" style="color:#aaa; display:block; margin-bottom:4px;">Цены</a>
                     <a href="o-nas.html" style="color:#aaa; display:block; margin-bottom:4px;">О компании</a>
                     <a href="#reviews" style="color:#aaa; display:block; margin-bottom:4px;">Отзывы</a>
+                    <a href="#blog" style="color:#aaa; display:block; margin-bottom:4px;">Статьи</a>
                     <a href="kontakty.html" style="color:#aaa; display:block; margin-bottom:4px;">Контакты</a>
                     <a href="#faq" style="color:#aaa; display:block;">FAQ</a>
                 </p>
@@ -1791,41 +1695,6 @@
 
 <!-- ===== SCROLL TO TOP ===== -->
 <button class="scroll-top" id="scrollTop" aria-label="Наверх">↑</button>
-
-<!-- ===== CHATBOT WIDGET ===== -->
-<button class="chat-fab" id="chatFab" aria-label="Чат с консультантом">💬</button>
-<div class="chat-window" id="chatWindow" role="dialog" aria-label="Чат с консультантом">
-    <div class="chat-header">
-        <div class="chat-header-left">
-            <div class="chat-avatar">🤖</div>
-            <div class="chat-header-info">
-                <h4>Консультант СептикПро</h4>
-                <span id="chatStatus">Онлайн</span>
-            </div>
-        </div>
-        <div class="chat-header-actions">
-            <button id="chatClearBtn" title="Очистить чат">🗑</button>
-            <button id="chatCloseBtn" title="Закрыть">✕</button>
-        </div>
-    </div>
-    <div class="chat-messages" id="chatMessages">
-        <div class="chat-msg bot">
-            👋 Здравствуйте! Я виртуальный консультант <strong>СептикПро</strong>.<br><br>
-            Отвечаю на вопросы о септиках, монтаже и обслуживании.<br><br>
-            <em>Задайте вопрос, например:</em><br>
-            • Какой септик выбрать?<br>
-            • Сколько стоит монтаж?<br>
-            • Как часто откачивать?
-        </div>
-    </div>
-    <div class="chat-typing" id="chatTyping">
-        <span></span><span></span><span></span>
-    </div>
-    <div class="chat-input-area">
-        <textarea id="chatInput" placeholder="Введите сообщение..." rows="1"></textarea>
-        <button class="chat-send-btn" id="chatSendBtn" aria-label="Отправить">➤</button>
-    </div>
-</div>
 
 <!-- ===== SCRIPTS ===== -->
 <script>
@@ -1986,118 +1855,6 @@
         submitBtn.disabled = false;
     });
 
-    // ===== CHATBOT (без API — автоответы) ===== //
-    const chatFab = document.getElementById('chatFab');
-    const chatWindow = document.getElementById('chatWindow');
-    const chatCloseBtn = document.getElementById('chatCloseBtn');
-    const chatClearBtn = document.getElementById('chatClearBtn');
-    const chatMessages = document.getElementById('chatMessages');
-    const chatTyping = document.getElementById('chatTyping');
-    const chatInput = document.getElementById('chatInput');
-    const chatSendBtn = document.getElementById('chatSendBtn');
-
-    chatFab.addEventListener('click', () => {
-        chatWindow.classList.add('open');
-        chatFab.classList.add('hidden');
-        chatInput.focus();
-    });
-    chatCloseBtn.addEventListener('click', () => {
-        chatWindow.classList.remove('open');
-        chatFab.classList.remove('hidden');
-    });
-    chatClearBtn.addEventListener('click', () => {
-        chatMessages.innerHTML = '<div class="chat-msg bot">👋 Чат очищен. Задайте новый вопрос!</div>';
-    });
-    chatInput.addEventListener('input', () => {
-        chatInput.style.height = 'auto';
-        chatInput.style.height = Math.min(chatInput.scrollHeight, 90) + 'px';
-    });
-    chatInput.addEventListener('keydown', e => {
-        if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
-    });
-    chatSendBtn.addEventListener('click', sendMessage);
-
-    // ===== База знаний ===== //
-    const KB = [
-        { keywords: ['привет','здравствуй','добрый день','добрый вечер','доброе утро','хай','hello','hi'], answer: 'Здравствуйте! 😊 Я консультант СептикПро. Чем могу помочь? Могу рассказать о типах септиков, ценах или помочь с выбором.' },
-        { keywords: ['сколько стоит','цена','стоимость','тариф','прайс','расценки','сколько будет стоить'], answer: '💰 <strong>Наши тарифы:</strong><br><br>🔹 <strong>Базовый</strong> — 89 900 ₽ (накопительный, до 3 чел.)<br>🔹 <strong>Стандарт</strong> — 159 900 ₽ (с почвенной доочисткой, до 6 чел.)<br>🔹 <strong>Премиум</strong> — 259 900 ₽ (биостанция, до 10 чел.)<br><br>Точная стоимость зависит от объёма, грунта и глубины. <a href="#contact">Оставьте заявку</a> — инженер рассчитает бесплатно!' },
-        { keywords: ['выбрать','какой септик','какой выбрать','какой лучше','что выбрать','подобрать','подбор'], answer: '🤔 Чтобы подобрать оптимальный септик, мне нужно узнать:<br><br>1️⃣ Сколько человек будет пользоваться?<br>2️⃣ Это дом постоянного проживания или дача?<br>3️⃣ Какой у вас грунт (песок, глина)?<br>4️⃣ Уровень грунтовых вод высокий?<br><br>Напишите ответы, и я порекомендую подходящий вариант!' },
-        { keywords: ['накопительный','накопительные','емкость','бочка'], answer: '🔵 <strong>Накопительные септики</strong> — герметичные ёмкости для сбора стоков.<br><br>✅ Идеальны для дач и сезонного проживания<br>✅ Простая конструкция, надёжность<br>✅ Быстрый монтаж<br><br>⚠️ Требуют регулярной откачки ассенизатором (1–2 раза в месяц при ПМЖ).<br><br>Стоимость от <strong>89 900 ₽</strong> с монтажом.' },
-        { keywords: ['почвенная','доочистка','дренаж','поле фильтрации','фильтрация'], answer: '🟢 <strong>Септики с почвенной доочисткой</strong> — отстаивание + фильтрация через грунт.<br><br>✅ До 95% очистки стоков<br>✅ Экологично, без электроэнергии<br>✅ Подходит для ПМЖ<br><br>⚠️ Нужен участок под дренажное поле (15–25 м²). Не подходит для высоких УГВ и глинистых грунтов.<br><br>Стоимость от <strong>159 900 ₽</strong> под ключ.' },
-        { keywords: ['биостанция','биологическая','биоочистка','станция','топас','юнилос','твёрь','тверь'], answer: '⚡ <strong>Станции биологической очистки</strong> — полный цикл переработки стоков.<br><br>✅ До 98% очистки<br>✅ Компактны, не требуют большого участка<br>✅ Сбрасывают техническую воду прямо в канаву<br>✅ Работают при любых грунтах<br><br>Работаем с брендами: <strong>Топас, Юнилос, Тверь</strong>.<br>Стоимость от <strong>259 900 ₽</strong> под ключ.' },
-        { keywords: ['высокие грунтовые воды','угв','высокий ур','грунтовые воды','всплыть','всплытие','паводок'], answer: '🌊 <strong>Для высоких грунтовых вод</strong> рекомендуем:<br><br>🔹 Станции биологической очистки с якорением<br>🔹 Специальные конструкции, предотвращающие всплытие<br>🔹 Принудительный отвод очищенной воды<br><br>Герметичность + якорение = никаких проблем с паводками. Наш инженер выедет на замер и подберёт решение.' },
-        { keywords: ['монтаж','установка','установить','сколько по времени','длительность','сроки'], answer: '🔧 <strong>Монтаж за 1 день!</strong><br><br>Приезжаем с техникой, копаем котлован, устанавливаем, подключаем, запускаем. Вы пользуетесь в тот же день.<br><br>📋 Этапы:<br>1. Выезд инженера (бесплатно)<br>2. Согласование и договор<br>3. Монтаж<br>4. Пуско-наладка<br><br><a href="#contact">Оставьте заявку</a> — согласуем удобный день!' },
-        { keywords: ['гарантия','гарантийный','обслуживание','сервис','ремонт'], answer: '🛡 <strong>Гарантия 5 лет</strong> — закрепляем в договоре!<br><br>Что входит:<br>✅ Бесплатное сервисное обслуживание — первый год<br>✅ Плановый осмотр и чистка фильтров<br>✅ Проверка компрессора и насосов<br>✅ Ремонт при необходимости<br><br>После гарантии — абонентское обслуживание на выгодных условиях.' },
-        { keywords: ['откачка','откачивать','как часто','ила','ил','ассенизатор'], answer: '🔄 <strong>Откачка:</strong><br><br>🔹 Накопительные — по мере заполнения, ~1–2 раза в месяц (при ПМЖ)<br>🔹 Биостанции — 1–2 раза в год (избыточный ил)<br>🔹 С почвенной доочисткой — ~1 раз в 2–3 года<br><br>Мы предоставляем услуги откачки. Также первый год обслуживание входит в гарантию!' },
-        { keywords: ['зимой','зима','мороз','минус','промерзание','утепление'], answer: '❄️ <strong>Зимний монтаж — возможен!</strong><br><br>✅ Используем термоактивные материалы<br>✅ При необходимости прогреваем грунт<br>✅ Зимой УГВ ниже → удобнее работать<br>✅ Грунт плотнее — котлован держит форму<br><br>Септики снабжаются утеплёнными горловинами для защиты от промерзания.' },
-        { keywords: ['разрешение','документы','документ','договор','паспорт','санэпид','сэс'], answer: '📋 <strong>Документы:</strong><br><br>🔹 Накопительные и биостанции до 1,5 м³/сут — разрешение <strong>не требуется</strong><br>🔹 Поля фильтрации — нужен санэпидемиологический паспорт<br><br>Мы помогаем с оформлением! В комплекте:<br>✅ Договор<br>✅ Акты выполненных работ<br>✅ Паспорт станции<br>✅ Гарантийный талон<br>✅ Декларация' },
-        { keywords: ['где','адрес','телефон','контакт','связаться','позвонить','номер','email','почта'], answer: '📍 <strong>Наши контакты:</strong><br><br>📞 <a href="tel:+79208195402">+7 (920) 819-54-02</a><br>✉️ fortnut038@gmail.com<br>📍 г. Орёл, пер. Крымский, 2<br>🕐 Пн–Пт: 9:00–20:00, Сб: 10:00–18:00<br><br>Звоните — проконсультируем бесплатно!' },
-        { keywords: ['заявка','заказать','оставить заявку','вызов','выезд'], answer: '✅ <strong>Заявка бесплатна!</strong><br><br>Выезд инженера, консультация, расчёт стоимости — всё бесплатно и без обязательств.<br><br><a href="#contact">Заполните форму</a> или позвоните: <a href="tel:+79208195402">+7 (920) 819-54-02</a><br><br>Перезвоним в течение 30 минут!' },
-        { keywords: ['спасибо','благодарю','отлично','хорошо','понял','поняла','ясно','ок','окей'], answer: '🙏 Рад помочь! Если появятся ещё вопросы — пишите. А чтобы мы всё рассчитали индивидуально — <a href="#contact">оставьте заявку</a> или позвоните <a href="tel:+79208195402">+7 (920) 819-54-02</a>. Удачи!' },
-        { keywords: ['кто вы','что за компания','о компании','опыт','сколько лет','кто работает'], answer: '🏢 <strong>СептикПро</strong> — проектируем, поставляем и монтируем септики под ключ в Орле и по всей области.<br><br>✅ 12+ лет на рынке<br>✅ 850+ объектов<br>✅ Гарантия 5 лет<br>✅ Работаем с брендами: Топас, Юнилос, Тверь<br><br><a href="#contact">Свяжитесь с нами</a> для бесплатной консультации!' },
-        { keywords: ['без электричества','без света','электричество','электроэнергия','насос','компрессор'], answer: '⚡ <strong>Электричество:</strong><br><br>🔹 Накопительные и с почвенной доочисткой — <strong>работают без электричества</strong><br>🔹 Биостанции (Топас, Юнилос) — требуют подключения (компрессор ~40-60 Вт — как лампочка)<br><br>Если нет электричества на участке — подберём энергонезависимый вариант!' },
-        { keywords: ['объём','объем','литры','литров','м3','м³','куб','кубов','емкость'], answer: '📏 <strong>Подбор объёма:</strong><br><br>Расчёт: ~200 литров на человека в сутки.<br><br>🔹 1–3 человека → 2–3 м³<br>🔹 4–6 человек → 4–6 м³<br>🔹 7–10 человек → 8–10 м³<br><br>Слишком большой — переплата. Слишком маленький — быстро заполнится. Инженер рассчитает точно!' },
-        { keywords: ['оплата','оплатить','рассрочка','кредит','скидка','скидки','акция'], answer: '💳 <strong>Оплата:</strong><br><br>✅ Наличный и безналичный расчёт<br>✅ Рассрочка на установку<br>✅ Скидки при оплате полной суммы<br><br>Точная стоимость — по результатам выезда инженера. <a href="#contact">Оставьте заявку</a> — рассчитаем бесплатно!' }
-    ];
-
-    function findAnswer(userText) {
-        const text = userText.toLowerCase().replace(/[^\p{L}\p{N}\s]/gu, '');
-        let bestScore = 0;
-        let bestAnswer = null;
-        for (const item of KB) {
-            let score = 0;
-            for (const kw of item.keywords) {
-                if (text.includes(kw)) score += kw.length * 2;
-            }
-            if (score > bestScore) { bestScore = score; bestAnswer = item.answer; }
-        }
-        return bestAnswer;
-    }
-
-    function sendMessage() {
-        const text = chatInput.value.trim();
-        if (!text) return;
-        addUserMessage(text);
-        chatInput.value = '';
-        chatInput.style.height = 'auto';
-        chatSendBtn.disabled = true;
-        chatTyping.classList.add('visible');
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-        const delay = 600 + Math.random() * 600;
-        setTimeout(() => {
-            const answer = findAnswer(text);
-            if (answer) {
-                addBotMessage(answer);
-            } else {
-                const fallbacks = [
-                    '🤔 Хм, не совсем понял вопрос. Попробуйте перефразировать или спросите о:<br>• Типах септиков<br>• Ценах и монтаже<br>• Гарантии и обслуживании',
-                    '❓ Интересный вопрос! К сожалению, пока не могу ответить. Попробуйте спросить про:<br>• Какой септик выбрать<br>• Стоимость монтажа<br>• Контакты и выезд',
-                    '💡 Пока я не могу ответить на этот вопрос. Но я хорошо знаю:<br>• Типы септиков и цены<br>• Условия монтажа и гарантии<br>• Наш адрес и телефон'
-                ];
-                addBotMessage(fallbacks[Math.floor(Math.random() * fallbacks.length)]);
-            }
-            chatTyping.classList.remove('visible');
-            chatSendBtn.disabled = false;
-            chatInput.focus();
-        }, delay);
-    }
-
-    function addUserMessage(text) {
-        const div = document.createElement('div');
-        div.className = 'chat-msg user';
-        div.textContent = text;
-        chatMessages.appendChild(div);
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-    }
-
-    function addBotMessage(html) {
-        const div = document.createElement('div');
-        div.className = 'chat-msg bot';
-        div.innerHTML = html;
-        chatMessages.appendChild(div);
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-    }
-
     // ===== КАЛЬКУЛЯТОР СТОИМОСТИ ===== //
     const calcBtn = document.getElementById('calcBtn');
     const calcResult = document.getElementById('calcResult');
@@ -2105,9 +1862,9 @@
     const calcDesc = document.getElementById('calcDesc');
 
     const PRICES = {
-        accum: { base: 89900, perPerson: 0, name: 'Базовый', fullName: 'Накопительный септик', volume: '2 м³', badge: '🔧 Накопительный', desc: 'Герметичная ёмкость для сбора стоков. Идеален для дач и сезонного проживания. Требует откачки 1–2 раза в месяц.' },
-        soil: { base: 159900, perPerson: 5000, name: 'Стандарт', fullName: 'Септик с почвенной доочисткой', volume: '4 м³', badge: '♻ Трёхкамерный', desc: 'Три камеры + дренажное поле. До 95% очистки стоков. Экологично, без электричества. Для дома до 6 человек.' },
-        bio: { base: 259900, perPerson: 8000, name: 'Премиум', fullName: 'Станция биологической очистки', volume: '8 м³', badge: '⚡ Биостанция', desc: 'Полный цикл переработки — до 98% очистки. Сбрасывает техническую воду. Компактна, работает при любых грунтах.' }
+        accum: { base: 89900, perPerson: 0, name: 'Евролос 3', fullName: 'Накопительный септик', volume: '2 м³', badge: '🔧 Накопительный', desc: 'Герметичная ёмкость для сбора стоков. Идеален для дач и сезонного проживания. Требует откачки 1–2 раза в месяц.' },
+        soil: { base: 159900, perPerson: 5000, name: 'Евролос 5', fullName: 'Септик с почвенной доочисткой', volume: '4 м³', badge: '♻ Трёхкамерный', desc: 'Три камеры + дренажное поле. До 95% очистки стоков. Экологично, без электричества. Для дома до 6 человек.' },
+        bio: { base: 259900, perPerson: 8000, name: 'Евролос 8', fullName: 'Станция биологической очистки', volume: '8 м³', badge: '⚡ Биостанция', desc: 'Полный цикл переработки — до 98% очистки. Сбрасывает техническую воду. Компактна, работает при любых грунтах.' }
     };
     const SOIL_MULT = { sand: 1.0, loam: 1.1, clay: 1.25, water: 1.35 };
     const SOIL_NAMES = { sand: 'Песчаный', loam: 'Суглинок', clay: 'Глина', water: 'Высокие УГВ' };
@@ -2151,6 +1908,15 @@
         calcResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     });
 
+    // ===== БЛОГ: раскрытие текста ===== //
+    window.toggleBlog = function(btn, id) {
+        var el = document.getElementById(id);
+        var isOpen = el.classList.contains('visible');
+        el.classList.toggle('visible');
+        btn.classList.toggle('open');
+        btn.textContent = isOpen ? 'Читать далее →' : 'Свернуть ↑';
+    };
+
     // ===== SCROLL TO TOP ===== //
     const scrollTopBtn = document.getElementById('scrollTop');
     window.addEventListener('scroll', () => {
@@ -2167,5 +1933,423 @@
             .catch(err => console.log('SW registration failed:', err));
     }
 </script>
+
+<script>
+    // 3D-модель заменена на изображение логотипа Евролос (голова лося)
+
+    // Убедимся, что на трёхмерном контейнере нет initialized=true (старый код мог его поставить)
+    var c = document.getElementById('threeContainer');
+    if (c && c.dataset.initialized) delete c.dataset.initialized;
+</script>
+
+<!-- ===== AI-КОНСУЛЬТАНТ ===== -->
+<style>
+#consultant-toggle {
+    position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+    width: 60px; height: 60px; border-radius: 50%; border: none;
+    background: linear-gradient(135deg,#0d9668,#0ab07a);
+    color: #fff; font-size: 28px; cursor: pointer; box-shadow: 0 4px 20px rgba(13,150,104,0.4);
+    transition: transform .2s, box-shadow .2s;
+}
+#consultant-toggle:hover { transform: scale(1.08); box-shadow: 0 6px 28px rgba(13,150,104,0.5); }
+#consultant-badge {
+    position: absolute; top: -4px; right: -4px;
+    background: #f44336; color: #fff; font-size: 11px;
+    width: 20px; height: 20px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+}
+#consultant-panel {
+    position: fixed; bottom: 96px; right: 24px; z-index: 9998;
+    width: 360px; max-width: calc(100vw - 48px); height: 520px; max-height: calc(100vh - 140px);
+    background: #fff; border-radius: 16px; box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+    display: none; flex-direction: column; overflow: hidden;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    animation: consultantIn .3s ease;
+}
+@keyframes consultantIn {
+    from { opacity: 0; transform: translateY(16px) scale(0.96); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+#consultant-panel.open { display: flex; }
+.consultant-header {
+    background: linear-gradient(135deg,#0d9668,#0ab07a); color: #fff; padding: 16px 20px;
+    display: flex; align-items: center; gap: 12px; flex-shrink: 0;
+}
+.consultant-avatar {
+    width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.2);
+    display: flex; align-items: center; justify-content: center; font-size: 20px;
+}
+.consultant-header-info { flex: 1; }
+.consultant-header-info strong { display: block; font-size: 15px; }
+.consultant-header-info span { display: block; font-size: 12px; opacity: .85; }
+.consultant-close {
+    background: none; border: none; color: #fff; font-size: 22px; cursor: pointer;
+    opacity: .7; line-height: 1; padding: 4px;
+}
+.consultant-close:hover { opacity: 1; }
+.consultant-msgs {
+    flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 10px;
+    background: #f8faf9;
+}
+.consultant-msgs::-webkit-scrollbar { width: 4px; }
+.consultant-msgs::-webkit-scrollbar-thumb { background: #ccc; border-radius: 2px; }
+.msg { max-width: 88%; padding: 12px 14px; border-radius: 14px; font-size: 14px; line-height: 1.45; animation: msgIn .25s ease; }
+@keyframes msgIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+.msg-bot {
+    align-self: flex-start; background: #fff; color: #333; border-bottom-left-radius: 4px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+.msg-user { align-self: flex-end; background: #0d9668; color: #fff; border-bottom-right-radius: 4px; }
+.msg-typing { align-self: flex-start; background: #fff; padding: 12px 18px; border-radius: 14px; border-bottom-left-radius: 4px; }
+.dot-pulse { display: flex; gap: 4px; }
+.dot-pulse span {
+    width: 7px; height: 7px; border-radius: 50%; background: #bbb;
+    animation: pulse 1.2s ease-in-out infinite;
+}
+.dot-pulse span:nth-child(2) { animation-delay: .2s; }
+.dot-pulse span:nth-child(3) { animation-delay: .4s; }
+@keyframes pulse { 0%,60%,100% { opacity: .3; transform: scale(.8); } 30% { opacity: 1; transform: scale(1.2); } }
+.msg-bot strong, .msg-bot b { color: #0d9668; }
+.msg-bot .highlight { color: #0d9668; font-weight: 600; }
+.consultant-input-area {
+    padding: 12px 16px; border-top: 1px solid #eee; display: flex; gap: 8px;
+    background: #fff; flex-shrink: 0;
+}
+.consultant-input-area input {
+    flex: 1; border: 1px solid #ddd; border-radius: 24px; padding: 10px 16px; font-size: 14px;
+    outline: none; font-family: inherit;
+}
+.consultant-input-area input:focus { border-color: #0d9668; }
+.consultant-send {
+    width: 40px; height: 40px; border-radius: 50%; border: none; background: #0d9668;
+    color: #fff; font-size: 18px; cursor: pointer; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+}
+.consultant-send:hover { background: #0ab07a; }
+.consultant-send:disabled { opacity: .5; cursor: not-allowed; }
+.consultant-form {
+    padding: 16px; border-top: 1px solid #eee; background: #fff; flex-shrink: 0;
+    display: none; flex-direction: column; gap: 10px;
+}
+.consultant-form.visible { display: flex; }
+.consultant-form input {
+    border: 1px solid #ddd; border-radius: 10px; padding: 11px 14px; font-size: 14px;
+    outline: none; font-family: inherit;
+}
+.consultant-form input:focus { border-color: #0d9668; }
+.consultant-form button {
+    background: linear-gradient(135deg,#0d9668,#0ab07a); color: #fff; border: none;
+    border-radius: 10px; padding: 12px; font-size: 15px; font-weight: 600; cursor: pointer;
+    font-family: inherit;
+}
+.consultant-form button:hover { opacity: .92; }
+.consultant-form button:disabled { opacity: .5; cursor: not-allowed; }
+.consultant-form small { font-size: 11px; color: #999; text-align: center; }
+.quick-btns {
+    display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px;
+}
+.quick-btn {
+    background: #e8f5ef; border: none; border-radius: 16px; padding: 6px 14px;
+    font-size: 12px; color: #0d9668; cursor: pointer; font-family: inherit;
+    transition: background .15s;
+}
+.quick-btn:hover { background: #c8e6d9; }
+.consultant-thanks {
+    text-align: center; padding: 30px 20px; color: #333;
+}
+.consultant-thanks .icon { font-size: 48px; margin-bottom: 8px; }
+.consultant-thanks strong { display: block; font-size: 18px; margin-bottom: 6px; }
+.consultant-thanks p { font-size: 14px; color: #666; }
+@media (max-width: 480px) {
+    #consultant-panel { right: 12px; bottom: 84px; width: calc(100vw - 24px); height: 60vh; }
+    #consultant-toggle { right: 16px; bottom: 16px; }
+}
+</style>
+
+<div id="consultant-toggle" onclick="toggleConsultant()" role="button" aria-label="Чат с консультантом">
+    💬
+    <div id="consultant-badge" style="display:none;">1</div>
+</div>
+
+<div id="consultant-panel">
+    <div class="consultant-header">
+        <div class="consultant-avatar">🔧</div>
+        <div class="consultant-header-info">
+            <strong>СептикПро</strong>
+            <span>Онлайн • Отвечаем за минуту</span>
+        </div>
+        <button class="consultant-close" onclick="toggleConsultant()" aria-label="Закрыть">✕</button>
+    </div>
+    <div class="consultant-msgs" id="consultantMsgs"></div>
+    <div class="consultant-input-area" id="consultantInputArea">
+        <input type="text" id="consultantInput" placeholder="Напишите ваш вопрос..." autocomplete="off" onkeydown="if(event.key==='Enter') sendMsg()">
+        <button class="consultant-send" id="consultantSendBtn" onclick="sendMsg()" aria-label="Отправить">➤</button>
+    </div>
+    <div class="consultant-form" id="consultantForm">
+        <input type="text" id="leadName" placeholder="Ваше имя" required>
+        <input type="tel" id="leadPhone" placeholder="Номер телефона" required>
+        <button id="leadSubmitBtn" onclick="submitLead()">⎯⎯⎯  Оставить заявку  ⎯⎯⎯</button>
+        <small>🔒 Конфиденциально. Никакого спама.</small>
+    </div>
+</div>
+
+<script>
+(function() {
+    const MSGS = document.getElementById('consultantMsgs');
+    const INPUT = document.getElementById('consultantInput');
+    const FORM = document.getElementById('consultantForm');
+    const BTN_TOGGLE = document.getElementById('consultant-toggle');
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyxOS7hj2TnEdhPvuYulTCIg23aoTVyuZP4aHL2zGiF5NvhrIzHI1W0Q7_Kk-MTcHUZHQ/exec';
+
+    const SCENARIOS = [
+        { words: ['цене','цена','стоит','сколько','стоимость','прайс','цена','руб','денег','деньги','дорого','бюджет'],
+          answer: function() {
+            var p = ['Цена зависит от <b>количества человек</b> в доме и типа грунта на участке. Понимаю, хочется сразу цифру — давайте прикинем:\n\n🔹 <b>Евролос 3</b> (дача, 2–3 чел) — 89 900 ₽ под ключ\n🔹 <b>Евролос 5</b> (дом, 4–6 чел) — 159 900 ₽ под ключ\n🔹 <b>Евролос 8</b> (коттедж, до 10 чел) — 259 900 ₽ под ключ\n\n⭐ <b class="highlight">До конца июля — скидка 15% на монтаж</b> и <b>бесплатный выезд инженера</b> на замер в Орле и области!\n\nСколько человек у вас будет проживать? Я подберу точный вариант.'];
+            return p[0];
+          },
+          askBack: true },
+        { words: ['какой','выбрать','лучше','подойдет','подойдёт','какую','вариант','посовету'],
+          answer: function() {
+            var p = ['Выбор септика — это всегда компромисс между ценой и комфортом. Главное, чтобы не было <b>запаха на участке</b> и не пришлось вызывать ассенизатора каждую неделю.\n\nВ Орловской области мы чаще всего ставим:\n• <b>Евролос 3</b> — для дачи и сезонного проживания (2–3 чел)\n• <b>Евролос 5</b> — для дома с постоянным проживанием (4–6 чел)\n• <b>Евролос 8</b> — для больших домов и гостевых домов (до 10 чел)\n\nПодскажите, сколько человек живёт в доме и какой у вас тип грунта (песок, глина)? Я предложу 2–3 оптимальных варианта.'];
+            return p[0];
+          },
+          askBack: true },
+        { words: ['монтаж','установк','смонтиров','ставят','постави','делают монтаж','под ключ','копка','котлован','работ'],
+          answer: function() {
+            return 'Монтируем под ключ за <b>1 день</b> под ключ. Никаких сюрпризов:\n\n🔸 Бесплатный выезд инженера на участок — оценка грунта, замеры\n🔸 Подготовка котлована и монтаж за один день\n🔸 Гарантия 5 лет на оборудование и работы\n🔸 Обслуживание раз в год — мы сами напоминаем\n\nХотите записаться на <b>бесплатный замер</b>? Оставьте телефон, и я передам задачу инженеру.';
+          },
+          askBack: false,
+          showForm: true },
+        { words: ['откачк','ассенизатор','выгребн','яма','чистк','насос'],
+          answer: function() {
+            return 'Выгребная яма — это вечный запах на участке и регулярные траты на ассенизатора. Современный септик <b>Евролос</b> решает обе проблемы:\n\n✅ <b>Никакого запаха</b> — герметичный корпус и биологическая очистка\n✅ <b>Экономия</b> — откачка нужна раз в 1–2 года, а не каждый месяц\n✅ <b>Экологично</b> — очищенная вода уходит в грунт без вреда для почвы\n\nЕсли у вас сейчас выгребная яма — мы можем установить септик на её место. Оставьте заявку на <b>бесплатный выезд</b> — инженер всё посмотрит и скажет точную смету.';
+          },
+          askBack: false,
+          showForm: true },
+        { words: ['запах','воня','пахн','неприят'],
+          answer: function() {
+            return 'Запах на участке — это главная боль, я вас понимаю. Чаще всего он появляется, когда:\n\n• старый септик переполнен или разгерметизирован\n• неправильно подобрана система вентиляции\n• стоит обычная выгребная яма\n\n<b>Евролос</b> — это полностью герметичная система. Весь процесс очистки проходит внутри, <b>запаха снаружи нет</b>. Даже рядом с люком вы ничего не почувствуете.\n\nЕсли хотите избавиться от запаха навсегда — давайте сделаем замер. Это бесплатно.';
+          },
+          askBack: false,
+          showForm: true },
+        { words: ['дач','сезон','выходн','летн'],
+          answer: function() {
+            return 'Для дачи с сезонным проживанием отлично подходит <b>Евролос 3</b>:\n\n🏡 Компактный — не занимает много места\n⚡ Энергонезависимый — не нужен свет\n💰 Цена под ключ — от 89 900 ₽ (со скидкой на монтаж до конца июля)\n🔇 Абсолютно без запаха — приезжайте и отдыхайте\n\nСколько человек обычно бывает на даче?';
+          },
+          askBack: true },
+        { words: ['грунт','глин','песок','вода','уровень','почв','болот','весн'],
+          answer: function() {
+            return 'Тип грунта — важный момент! В Орловской области часто встречается глина и суглинок. Если грунтовые воды высокие — нужна особая установка.\n\n<b>Евролос</b> отлично работает в любых грунтах, в том числе:\n• Песок — хорошая фильтрация, стандартный монтаж\n• Глина и суглинок — потребуется поле фильтрации или дренажный колодец\n• Высокие грунтовые воды — ставим на бетонную плиту с якорением\n\nУ вас уже есть результаты геологии участка? Если нет — наш инженер бесплатно определит тип грунта при выезде.';
+          },
+          askBack: false,
+          showForm: true },
+        { words: ['отзыв','гарант','сколько работа','служб','надежн','лома'],
+          answer: function() {
+            return 'Даём <b>гарантию 5 лет</b> на оборудование и монтаж. Корпус Евролос сделан из ПНД 10 мм — это прочный пластик, который не трескается зимой и не гниёт. Реальный срок службы — <b>30+ лет</b>.\n\nОбслуживание простое: раз в год вызываете нас, мы откачиваем избыточный ил и проверяем работу. Сами напоминаем, когда пора.\n\nВ Орле у нас уже более 50 довольных клиентов. Можем показать контакты для связи.';
+          },
+          askBack: false,
+          showForm: false },
+    ];
+
+    function findScenario(text) {
+        var t = text.toLowerCase();
+        // сначала ищем по полному совпадению нескольких слов
+        var best = null, bestCount = 0;
+        for (var i = 0; i < SCENARIOS.length; i++) {
+            var count = 0;
+            for (var j = 0; j < SCENARIOS[i].words.length; j++) {
+                if (t.indexOf(SCENARIOS[i].words[j]) !== -1) count++;
+            }
+            if (count > bestCount) {
+                bestCount = count;
+                best = SCENARIOS[i];
+            }
+        }
+        return bestCount > 0 ? best : null;
+    }
+
+    window.toggleConsultant = function() {
+        var panel = document.getElementById('consultant-panel');
+        var badge = document.getElementById('consultant-badge');
+        var isOpen = panel.classList.contains('open');
+        panel.classList.toggle('open');
+        if (!isOpen) {
+            badge.style.display = 'none';
+            document.getElementById('consultantInput').focus();
+        }
+    };
+
+    function addMsg(text, cls) {
+        var div = document.createElement('div');
+        div.className = 'msg ' + cls;
+        div.innerHTML = text;
+        MSGS.appendChild(div);
+        MSGS.scrollTop = MSGS.scrollHeight;
+    }
+
+    function showTyping(callback, delay) {
+        var div = document.createElement('div');
+        div.className = 'msg-typing';
+        div.id = 'typingIndicator';
+        div.innerHTML = '<div class="dot-pulse"><span></span><span></span><span></span></div>';
+        MSGS.appendChild(div);
+        MSGS.scrollTop = MSGS.scrollHeight;
+        setTimeout(function() {
+            var el = document.getElementById('typingIndicator');
+            if (el) el.remove();
+            if (callback) callback();
+        }, delay || 1200);
+    }
+
+    function showQuickButtons() {
+        var container = document.createElement('div');
+        container.className = 'quick-btns';
+        container.id = 'quickBtns';
+        var btns = ['Сколько стоит?','Какой выбрать?','Монтаж под ключ','Нет запаха?'];
+        btns.forEach(function(text) {
+            var btn = document.createElement('button');
+            btn.className = 'quick-btn';
+            btn.textContent = text;
+            btn.onclick = function() {
+                var btnsEl = document.getElementById('quickBtns');
+                if (btnsEl) btnsEl.remove();
+                addMsg(text, 'msg-user');
+                handleUserInput(text);
+            };
+            container.appendChild(btn);
+        });
+        MSGS.appendChild(container);
+        MSGS.scrollTop = MSGS.scrollHeight;
+    }
+
+    function showForm() {
+        FORM.classList.add('visible');
+        document.getElementById('consultantInputArea').style.display = 'none';
+    }
+
+    window.sendMsg = function() {
+        var text = INPUT.value.trim();
+        if (!text) return;
+        INPUT.value = '';
+        var btns = document.getElementById('quickBtns');
+        if (btns) btns.remove();
+        addMsg(text, 'msg-user');
+        handleUserInput(text);
+    };
+
+    function handleUserInput(text) {
+        var scenario = findScenario(text);
+        showTyping(function() {
+            if (scenario) {
+                var answer = scenario.answer();
+                addMsg(answer, 'msg-bot');
+                if (scenario.showForm) {
+                    showForm();
+                } else if (scenario.askBack) {
+                    showQuickButtons();
+                } else {
+                    // подталкиваем к заявке
+                    setTimeout(function() {
+                        addMsg('Можете оставить телефон — я передам точный расчёт инженеру. Или просто спросите ещё что-то 🙂', 'msg-bot');
+                        showQuickButtons();
+                    }, 800);
+                }
+            } else {
+                // Не распознали — предложим заявку
+                addMsg('Хороший вопрос! Давайте я передам его нашему инженеру — он свяжется с вами и бесплатно проконсультирует. Оставьте свой номер телефона 👇', 'msg-bot');
+                showForm();
+            }
+        });
+    }
+
+    window.submitLead = function() {
+        var name = document.getElementById('leadName').value.trim();
+        var phone = document.getElementById('leadPhone').value.trim();
+        if (!name) { document.getElementById('leadName').focus(); return; }
+        if (!phone || phone.length < 10) { document.getElementById('leadPhone').focus(); return; }
+
+        var btn = document.getElementById('leadSubmitBtn');
+        btn.disabled = true;
+        btn.textContent = 'Отправляем...';
+
+        // Собираем последнее сообщение пользователя как комментарий
+        var lastUserMsg = '';
+        var msgs = MSGS.querySelectorAll('.msg-user');
+        if (msgs.length) lastUserMsg = msgs[msgs.length-1].textContent || '';
+
+        var payload = JSON.stringify({
+            name: name,
+            phone: phone,
+            email: 'из чата',
+            type: 'Консультация с сайта (AI)',
+            comment: 'Вопрос: ' + lastUserMsg
+        });
+
+        fetch(SCRIPT_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+            mode: 'no-cors',
+            body: payload
+        }).then(function() {
+            // no-cors — ответ не прочитать, показываем спасибо
+            showThanks();
+        }).catch(function() {
+            // даже если fetch упал, часто запрос уходит
+            showThanks();
+        });
+    };
+
+    function showThanks() {
+        MSGS.innerHTML = '';
+        document.getElementById('consultantInputArea').style.display = 'none';
+        FORM.classList.remove('visible');
+        var div = document.createElement('div');
+        div.className = 'consultant-thanks';
+        div.innerHTML = '<div class="icon">✅</div><strong>Спасибо, заявка принята!</strong><p>Наш инженер свяжется с вами в ближайшее время.<br>Работаем в Орле и Орловской области.</p><br><button onclick="resetConsultant()" style="background:#0d9668;color:#fff;border:none;border-radius:10px;padding:10px 24px;cursor:pointer;font-size:14px;font-family:inherit;">Задать ещё вопрос</button>';
+        MSGS.appendChild(div);
+    }
+
+    window.resetConsultant = function() {
+        MSGS.innerHTML = '';
+        document.getElementById('consultantInputArea').style.display = 'flex';
+        FORM.classList.remove('visible');
+        document.getElementById('leadName').value = '';
+        document.getElementById('leadPhone').value = '';
+        document.getElementById('leadSubmitBtn').disabled = false;
+        document.getElementById('leadSubmitBtn').textContent = '⎯⎯⎯  Оставить заявку  ⎯⎯⎯';
+        startChat();
+    };
+
+    function startChat() {
+        addMsg('Здравствуйте! 👋<br>Меня зовут <strong>СептикПро</strong>, я помогу подобрать септик для вашего дома или дачи в Орле и области.<br><br>Что вас интересует?', 'msg-bot');
+        setTimeout(showQuickButtons, 500);
+    }
+
+    // Показываем badge через 3 секунды, если не открыли чат
+    setTimeout(function() {
+        if (!document.getElementById('consultant-panel').classList.contains('open')) {
+            document.getElementById('consultant-badge').style.display = 'flex';
+        }
+    }, 3000);
+
+    // Старт
+    startChat();
+
+    // Показать чат через 15 секунд (если не открыли сами)
+    setTimeout(function() {
+        if (!document.getElementById('consultant-panel').classList.contains('open')) {
+            toggleConsultant();
+        }
+    }, 15000);
+})();
+</script>
+
+<!-- Плавающая кнопка звонка -->
+<a class="phone-fab" href="tel:+79208195402" aria-label="Позвонить">
+    📞
+    <span class="phone-fab-tooltip">+7 (920) 819-54-02</span>
+</a>
+
 </body>
 </html>

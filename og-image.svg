@@ -75,13 +75,6 @@
   <!-- Website URL -->
   <text x="80" y="530" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#6b7280" letter-spacing="0.5">septikpro57.ru</text>
 
-  <!-- Stats pills -->
-  <rect x="700" y="420" width="140" height="44" rx="22" fill="rgba(13,150,104,0.15)" stroke="rgba(13,150,104,0.3)" stroke-width="1"/>
-  <text x="770" y="447" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" fill="#0d9668" text-anchor="middle">12+ лет</text>
-
-  <rect x="860" y="420" width="140" height="44" rx="22" fill="rgba(13,150,104,0.15)" stroke="rgba(13,150,104,0.3)" stroke-width="1"/>
-  <text x="930" y="447" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" fill="#0d9668" text-anchor="middle">850+ объектов</text>
-
   <rect x="1020" y="420" width="140" height="44" rx="22" fill="rgba(13,150,104,0.15)" stroke="rgba(13,150,104,0.3)" stroke-width="1"/>
   <text x="1090" y="447" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" fill="#0d9668" text-anchor="middle">5 лет гарантии</text>
 </svg>
