@@ -1170,11 +1170,6 @@
                 Поставляем и монтируем септики под ключ.
                 Гарантия 5 лет, сервисное обслуживание и полная документация.
             </p>
-            <div class="hero-buttons">
-                <a href="#contact" class="btn btn-primary">
-                    ✦ Рассчитать стоимость
-                </a>
-            </div>
             <div class="hero-stats">
                 <div class="hero-stat">
                     <h4><span class="counter" data-target="12">0</span>+ лет</h4>
@@ -1190,51 +1185,195 @@
                 </div>
             </div>
         </div>
-        <div class="hero-visual reveal tilt-3d" id="heroVisual">
-            <svg viewBox="0 0 400 320" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="0" y="60" width="400" height="8" rx="4" fill="#c4b998"/>
-                <rect x="0" y="0" width="400" height="60" rx="8" fill="#a8d5a2" opacity=".4"/>
-                <path d="M0 60 Q40 40 80 60 Q120 40 160 60 Q200 40 240 60 Q280 40 320 60 Q360 40 400 60" fill="#7ecb79" opacity=".3"/>
-                <rect x="70" y="90" width="260" height="150" rx="24" fill="#e8f0eb" stroke="#0d9668" stroke-width="2"/>
-                <rect x="82" y="170" width="236" height="60" rx="12" fill="#4fa3e0" opacity=".45">
-                    <animate attributeName="y" values="170;165;170" dur="3s" repeatCount="indefinite"/>
-                    <animate attributeName="height" values="60;65;60" dur="3s" repeatCount="indefinite"/>
-                </rect>
-                <rect x="140" y="100" width="6" height="70" rx="3" fill="#0d9668" opacity=".4"/>
-                <rect x="250" y="100" width="6" height="70" rx="3" fill="#0d9668" opacity=".4"/>
-                <rect x="30" y="130" width="48" height="14" rx="7" fill="#0d9668"/>
-                <rect x="322" y="130" width="48" height="14" rx="7" fill="#0d9668"/>
-                <path d="M36 137 L24 137" stroke="#0d9668" stroke-width="2" marker-end="url(#arrow)"/>
-                <text x="42" y="124" fill="#666" font-size="12">вход</text>
-                <text x="330" y="124" fill="#666" font-size="12">выход</text>
-                <circle cx="110" cy="200" r="4" fill="#4fa3e0" opacity=".4">
-                    <animate attributeName="cy" values="200;190;200" dur="2s" repeatCount="indefinite"/>
-                    <animate attributeName="opacity" values=".4;.7;.4" dur="2s" repeatCount="indefinite"/>
-                </circle>
-                <circle cx="140" cy="210" r="6" fill="#4fa3e0" opacity=".3">
-                    <animate attributeName="cy" values="210;198;210" dur="2.5s" repeatCount="indefinite"/>
-                    <animate attributeName="opacity" values=".3;.6;.3" dur="2.5s" repeatCount="indefinite"/>
-                </circle>
-                <circle cx="170" cy="195" r="3" fill="#4fa3e0" opacity=".5">
-                    <animate attributeName="cy" values="195;185;195" dur="1.8s" repeatCount="indefinite"/>
-                    <animate attributeName="opacity" values=".5;.8;.5" dur="1.8s" repeatCount="indefinite"/>
-                </circle>
-                <circle cx="200" cy="215" r="5" fill="#4fa3e0" opacity=".35">
-                    <animate attributeName="cy" values="215;203;215" dur="2.2s" repeatCount="indefinite"/>
-                    <animate attributeName="opacity" values=".35;.65;.35" dur="2.2s" repeatCount="indefinite"/>
-                </circle>
-                <rect x="40" y="10" width="60" height="50" rx="6" fill="#f0d9b5"/>
-                <polygon points="35,10 70,0 105,10" fill="#d4a373"/>
-                <rect x="58" y="32" width="18" height="28" rx="2" fill="#8fc1d9"/>
-                <text x="46" y="76" fill="#888" font-size="10">дом</text>
-                <rect x="300" y="200" width="80" height="30" rx="8" fill="#a8d5a2" opacity=".5"/>
-                <text x="310" y="244" fill="#888" font-size="10">поле фильтрации</text>
+        <div class="hero-visual" id="heroVisual">
+            <svg viewBox="0 0 500 420" fill="none" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;">
                 <defs>
-                    <marker id="arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-                        <path d="M0,0 L8,3 L0,6" fill="#0d9668"/>
-                    </marker>
+                    <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#f0faf4"/>
+                        <stop offset="100%" stop-color="#e4f0e8"/>
+                    </linearGradient>
+                    <linearGradient id="frontGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#f8faf8"/>
+                        <stop offset="40%" stop-color="#edf2ed"/>
+                        <stop offset="100%" stop-color="#dce6dc"/>
+                    </linearGradient>
+                    <linearGradient id="topGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#ffffff"/>
+                        <stop offset="100%" stop-color="#eef4ee"/>
+                    </linearGradient>
+                    <linearGradient id="sideGrad" x1="0" y1="0" x2="1" y2="0">
+                        <stop offset="0%" stop-color="#d4e0d4"/>
+                        <stop offset="100%" stop-color="#bccabc"/>
+                    </linearGradient>
+                    <linearGradient id="hatchGrad" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#12d48e"/>
+                        <stop offset="100%" stop-color="#0a8a5a"/>
+                    </linearGradient>
+                    <linearGradient id="pipeGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#b0b8b0"/>
+                        <stop offset="100%" stop-color="#8a948a"/>
+                    </linearGradient>
+                    <linearGradient id="waterGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#4fa3e0" stop-opacity=".5"/>
+                        <stop offset="100%" stop-color="#2a7fc0" stop-opacity=".6"/>
+                    </linearGradient>
+                    <filter id="shadow" x="-20%" y="-10%" width="140%" height="140%">
+                        <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#0d9668" flood-opacity=".15"/>
+                    </filter>
+                    <filter id="hatchShadow">
+                        <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity=".15"/>
+                    </filter>
                 </defs>
-                <text x="200" y="260" fill="#0d9668" font-size="14" font-weight="600" text-anchor="middle">Септик 3-камерный</text>
+
+                <!-- Background -->
+                <rect width="500" height="420" rx="24" fill="url(#skyGrad)"/>
+
+                <!-- Ground shadow -->
+                <ellipse cx="255" cy="370" rx="170" ry="28" fill="#0d9668" opacity=".08"/>
+                <ellipse cx="255" cy="372" rx="120" ry="16" fill="#0d9668" opacity=".06"/>
+
+                <!-- Decorative ground line -->
+                <path d="M60 370 Q160 355 260 365 Q360 375 440 360" stroke="#0d9668" stroke-opacity=".12" stroke-width="2" fill="none"/>
+                <path d="M70 380 Q170 365 270 375 Q370 385 430 370" stroke="#0d9668" stroke-opacity=".08" stroke-width="1.5" fill="none"/>
+
+                <!-- === RIGHT SIDE FACE === -->
+                <path d="M355,155 L355,330 L290,278 L290,103 Z"
+                      fill="url(#sideGrad)" stroke="#b0c0b0" stroke-width="1.2" stroke-linejoin="round"/>
+
+                <!-- Side corrugation ribs -->
+                <line x1="355" y1="180" x2="290" y2="128" stroke="#c4d0c4" stroke-width="1" opacity=".6"/>
+                <line x1="355" y1="205" x2="290" y2="153" stroke="#c4d0c4" stroke-width="1" opacity=".6"/>
+                <line x1="355" y1="230" x2="290" y2="178" stroke="#c4d0c4" stroke-width="1" opacity=".6"/>
+                <line x1="355" y1="255" x2="290" y2="203" stroke="#c4d0c4" stroke-width="1" opacity=".6"/>
+                <line x1="355" y1="280" x2="290" y2="228" stroke="#c4d0c4" stroke-width="1" opacity=".6"/>
+                <line x1="355" y1="305" x2="290" y2="253" stroke="#c4d0c4" stroke-width="1" opacity=".6"/>
+
+                <!-- === TOP FACE === -->
+                <path d="M130,155 L355,155 L290,103 L65,103 Z"
+                      fill="url(#topGrad)" stroke="#c8d4c8" stroke-width="1.2" stroke-linejoin="round"/>
+
+                <!-- === FRONT FACE === -->
+                <rect x="130" y="155" width="225" height="175" rx="10"
+                      fill="url(#frontGrad)" stroke="#bcc8bc" stroke-width="1.5" filter="url(#shadow)"/>
+
+                <!-- Front corrugation ribs -->
+                <line x1="140" y1="185" x2="350" y2="185" stroke="#e0e8e0" stroke-width="1" opacity=".5"/>
+                <line x1="140" y1="215" x2="350" y2="215" stroke="#e0e8e0" stroke-width="1" opacity=".5"/>
+                <line x1="140" y1="245" x2="350" y2="245" stroke="#e0e8e0" stroke-width="1" opacity=".5"/>
+                <line x1="140" y1="275" x2="350" y2="275" stroke="#e0e8e0" stroke-width="1" opacity=".5"/>
+                <line x1="140" y1="305" x2="350" y2="305" stroke="#e0e8e0" stroke-width="1" opacity=".5"/>
+
+                <!-- === WATER LEVEL INDICATOR (strip on front) === -->
+                <rect x="340" y="175" width="8" height="100" rx="4" fill="#e8f0e8" stroke="#d0dcd0" stroke-width="1"/>
+                <rect x="341" y="195" width="6" height="80" rx="3" fill="url(#waterGrad)"/>
+                <!-- Level markers -->
+                <line x1="336" y1="195" x2="352" y2="195" stroke="#999" stroke-width="1"/>
+                <line x1="336" y1="225" x2="352" y2="225" stroke="#999" stroke-width="1"/>
+                <line x1="336" y1="255" x2="352" y2="255" stroke="#999" stroke-width="1"/>
+                <text x="336" y="190" fill="#888" font-size="8" text-anchor="end">max</text>
+                <text x="336" y="268" fill="#888" font-size="8" text-anchor="end">min</text>
+
+                <!-- === HATCH 1 (left) === -->
+                <g filter="url(#hatchShadow)">
+                    <ellipse cx="175" cy="135" rx="36" ry="18" fill="url(#hatchGrad)" stroke="#0a8a5a" stroke-width="2"/>
+                    <ellipse cx="175" cy="135" rx="26" ry="13" fill="#0fbd80" opacity=".6"/>
+                    <ellipse cx="175" cy="135" rx="18" ry="9" fill="#12d48e" opacity=".3"/>
+                    <!-- Hatch handle -->
+                    <rect x="168" y="131" width="14" height="4" rx="2" fill="#08704a" opacity=".7"/>
+                    <!-- Hatch bolt -->
+                    <circle cx="175" cy="135" r="2.5" fill="#08704a" opacity=".5"/>
+                </g>
+                <text x="175" y="160" fill="#555" font-size="9" text-anchor="middle">камера 1</text>
+
+                <!-- === HATCH 2 (center) === -->
+                <g filter="url(#hatchShadow)">
+                    <ellipse cx="255" cy="130" rx="36" ry="18" fill="url(#hatchGrad)" stroke="#0a8a5a" stroke-width="2"/>
+                    <ellipse cx="255" cy="130" rx="26" ry="13" fill="#0fbd80" opacity=".6"/>
+                    <ellipse cx="255" cy="130" rx="18" ry="9" fill="#12d48e" opacity=".3"/>
+                    <rect x="248" y="126" width="14" height="4" rx="2" fill="#08704a" opacity=".7"/>
+                    <circle cx="255" cy="130" r="2.5" fill="#08704a" opacity=".5"/>
+                </g>
+                <text x="255" y="155" fill="#555" font-size="9" text-anchor="middle">камера 2</text>
+
+                <!-- === HATCH 3 (right, slightly behind) === -->
+                <g filter="url(#hatchShadow)">
+                    <ellipse cx="325" cy="125" rx="30" ry="15" fill="url(#hatchGrad)" stroke="#0a8a5a" stroke-width="2"/>
+                    <ellipse cx="325" cy="125" rx="22" ry="11" fill="#0fbd80" opacity=".6"/>
+                    <ellipse cx="325" cy="125" rx="15" ry="7" fill="#12d48e" opacity=".3"/>
+                    <rect x="319" y="121" width="12" height="4" rx="2" fill="#08704a" opacity=".7"/>
+                    <circle cx="325" cy="125" r="2.5" fill="#08704a" opacity=".5"/>
+                </g>
+                <text x="325" y="150" fill="#555" font-size="9" text-anchor="middle">камера 3</text>
+
+                <!-- === INLET PIPE (left) === -->
+                <g>
+                    <!-- Pipe body -->
+                    <rect x="55" y="230" width="80" height="22" rx="4" fill="url(#pipeGrad)" stroke="#7a847a" stroke-width="1.5"/>
+                    <!-- Flange -->
+                    <rect x="120" y="226" width="12" height="30" rx="2" fill="#9aa69a" stroke="#7a847a" stroke-width="1"/>
+                    <!-- Pipe cap -->
+                    <ellipse cx="55" cy="241" rx="6" ry="12" fill="#9aa69a" stroke="#7a847a" stroke-width="1"/>
+                    <!-- Arrow -->
+                    <path d="M60 241 L75 241" stroke="#0d9668" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M68 236 L75 241 L68 246" stroke="#0d9668" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    <text x="62" y="222" fill="#666" font-size="10">приток</text>
+                </g>
+
+                <!-- === OUTLET PIPE (right, going back) === -->
+                <g>
+                    <rect x="350" y="220" width="70" height="20" rx="4" fill="url(#pipeGrad)" stroke="#7a847a" stroke-width="1.5"/>
+                    <rect x="345" y="217" width="12" height="26" rx="2" fill="#9aa69a" stroke="#7a847a" stroke-width="1"/>
+                    <path d="M420 230 L435 223" stroke="#0d9668" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M425 226 L435 223 L430 233" stroke="#0d9668" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    <text x="360" y="214" fill="#666" font-size="10">выход</text>
+                </g>
+
+                <!-- === BRAND LABEL "ЕВРОЛОС 3" === -->
+                <g>
+                    <rect x="170" y="280" rx="8" width="145" height="36" fill="#0d9668" opacity=".9"/>
+                    <text x="242" y="298" fill="white" font-size="16" font-weight="800" text-anchor="middle" letter-spacing="2">ЕВРОЛОС 3</text>
+                    <rect x="170" y="316" width="145" height="2" fill="#0d9668" opacity=".15"/>
+                    <text x="242" y="326" fill="#666" font-size="9" text-anchor="middle">трёхкамерный септик</text>
+                </g>
+
+                <!-- === DIMENSION ARROWS === -->
+                <!-- Height -->
+                <line x1="115" y1="160" x2="115" y2="325" stroke="#aaa" stroke-width="1" stroke-dasharray="3,3"/>
+                <path d="M110 165 L115 155 L120 165" stroke="#aaa" stroke-width="1" fill="none"/>
+                <path d="M110 320 L115 330 L120 320" stroke="#aaa" stroke-width="1" fill="none"/>
+                <text x="108" y="248" fill="#888" font-size="9" text-anchor="middle" transform="rotate(-90,108,248)">1500 мм</text>
+
+                <!-- Width -->
+                <line x1="135" y1="340" x2="350" y2="340" stroke="#aaa" stroke-width="1" stroke-dasharray="3,3"/>
+                <path d="M135 335 L135 345" stroke="#aaa" stroke-width="1"/>
+                <path d="M350 335 L350 345" stroke="#aaa" stroke-width="1"/>
+                <text x="242" y="352" fill="#888" font-size="9" text-anchor="middle">2360 мм</text>
+
+                <!-- === FLOATING 3D ANNOTATIONS === -->
+                <g opacity=".6">
+                    <!-- Material badge -->
+                    <rect x="40" y="70" width="95" height="22" rx="11" fill="#e8f0e8" stroke="#0d9668" stroke-width="1"/>
+                    <text x="87" y="84" fill="#0d9668" font-size="9" font-weight="600" text-anchor="middle">ПНД 10 мм</text>
+
+                    <!-- Volume badge -->
+                    <rect x="370" y="75" width="90" height="22" rx="11" fill="#e8f0e8" stroke="#0d9668" stroke-width="1"/>
+                    <text x="415" y="89" fill="#0d9668" font-size="9" font-weight="600" text-anchor="middle">3.8 м³</text>
+                </g>
+
+                <!-- === PRODUCT BADGE === -->
+                <g transform="translate(390, 320)">
+                    <rect x="-55" y="-20" width="110" height="40" rx="20" fill="white" stroke="#0d9668" stroke-width="1.5" filter="url(#shadow)" opacity=".95"/>
+                    <text x="0" y="-2" fill="#0d9668" font-size="11" font-weight="700" text-anchor="middle">Сделано в</text>
+                    <text x="0" y="12" fill="#0d9668" font-size="10" font-weight="700" text-anchor="middle">России 🇷🇺</text>
+                </g>
+
+                <!-- === STATUS LIGHTS === -->
+                <g>
+                    <circle cx="355" cy="165" r="4" fill="#4caf50" opacity=".9">
+                        <animate attributeName="opacity" values=".9;.4;.9" dur="2s" repeatCount="indefinite"/>
+                    </circle>
+                    <text x="365" y="168" fill="#666" font-size="8">работает</text>
+                </g>
             </svg>
         </div>
     </div>
