@@ -66,6 +66,16 @@
       "source": "/kontakty",
       "destination": "/kontakty.html",
       "permanent": true
-    }
+    },
+    {
+      "source": "/faq",
+      "destination": "/faq.html",
+      "permanent": true
+    },
+    {
+      "source": "/privacy",
+      "destination": "/privacy.html",
+      "permanent": true
+    },
   ]
 }

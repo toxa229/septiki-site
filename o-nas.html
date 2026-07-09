@@ -2,6 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>О компании СептикПро — установка септиков в Орле с 2018 года</title>
     <meta name="description" content="История компании СептикПро, наша команда и ценности. Устанавливаем септики в Орле и Орловской области с 2018 года.">
@@ -47,104 +48,7 @@
     <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Главная","item":"https://septikpro57.ru/"},{"@type":"ListItem","position":2,"name":"О компании","item":"https://septikpro57.ru/o-nas.html"}]}
     </script>
-    <style>
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; scroll-padding-top: 80px; -webkit-text-size-adjust: 100%; overscroll-behavior-y: contain; }
-        body { font-family: 'Inter', sans-serif; background: #f0f4f8; color: #333; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
-        button, a, input, select, textarea { touch-action: manipulation; }
-        input, select, textarea { font-size: 16px !important; }
-        button, .btn, .header-nav a, .header-phone-btn, .hamburger, .cta-btn { min-height: 44px; }
-        @supports (padding: max(0px)) {
-            header, footer { padding-left: max(12px, env(safe-area-inset-left)); padding-right: max(12px, env(safe-area-inset-right)); }
-            footer { padding-bottom: max(16px, env(safe-area-inset-bottom)); }
-        }
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
-        }
-
-        .header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(15,29,47,.92); backdrop-filter: blur(12px); padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 20px rgba(0,0,0,.3); }
-        .header-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-        .header-logo svg { width: 38px; height: 38px; }
-        .header-logo span { color: #fff; font-size: 1.2rem; font-weight: 800; letter-spacing: -.3px; }
-        .header-nav { display: flex; align-items: center; gap: 28px; }
-        .header-nav a { color: rgba(255,255,255,.8); text-decoration: none; font-size: .95rem; font-weight: 500; transition: color .2s; }
-        .header-nav a:hover { color: #fff; }
-        .header-phone-btn { display: inline-flex; align-items: center; gap: 8px; background: #1e88e5; color: #fff; padding: 10px 22px; border-radius: 12px; font-weight: 700; text-decoration: none; font-size: .95rem; transition: all .2s; }
-        .header-phone-btn:hover { background: #1565c0; transform: translateY(-1px); }
-        .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
-        .hamburger span { display: block; width: 24px; height: 2px; background: #fff; margin: 5px 0; transition: all .3s; }
-        .mobile-menu { display: none; position: fixed; top: 66px; left: 0; right: 0; background: rgba(15,29,47,.97); padding: 24px; z-index: 999; flex-direction: column; gap: 16px; }
-        .mobile-menu.active { display: flex; }
-        .mobile-menu a { color: rgba(255,255,255,.85); text-decoration: none; font-size: 1.05rem; padding: 8px 0; }
-
-        .page-hero { background: linear-gradient(135deg, #0f1d2f 0%, #1a3050 100%); padding: 140px 20px 70px; text-align: center; }
-        .section-title { font-size: 2.5rem; font-weight: 800; color: #fff; margin-bottom: 16px; }
-        .section-subtitle { font-size: 1.15rem; color: rgba(255,255,255,.7); max-width: 600px; margin: 0 auto; line-height: 1.6; }
-
-        .story-section { max-width: 800px; margin: 60px auto; padding: 0 20px; text-align: center; }
-        .story-section p { font-size: 1.15rem; color: #555; line-height: 1.8; }
-
-        .values-grid { max-width: 1100px; margin: 60px auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 28px; padding: 0 20px; }
-        .value-card { background: #fff; border-radius: 16px; padding: 32px; text-align: center; transition: all .3s; border: 1px solid #e8ecf0; }
-        .value-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,.12); transform: translateY(-4px); }
-        .value-icon { font-size: 2.5rem; margin-bottom: 16px; }
-        .value-title { font-size: 1.3rem; font-weight: 700; color: #1a3050; margin-bottom: 8px; }
-        .value-desc { color: #555; line-height: 1.6; }
-
-        .stats-section { max-width: 1100px; margin: 60px auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; padding: 0 20px; }
-        .stat-item { text-align: center; background: #1e88e5; color: white; border-radius: 16px; padding: 32px 20px; transition: transform .3s; }
-        .stat-item:hover { transform: translateY(-4px); }
-        .stat-number { font-size: 2.5rem; font-weight: 900; }
-        .stat-label { font-size: 1rem; margin-top: 8px; opacity: .9; }
-
-        .cta-section { background: linear-gradient(135deg, #1e88e5, #1565c0); border-radius: 20px; max-width: 800px; margin: 60px auto; padding: 48px; text-align: center; color: white; }
-        .cta-section h2 { font-size: 2rem; margin-bottom: 12px; }
-        .cta-section p { font-size: 1.1rem; opacity: .9; margin-bottom: 28px; }
-        .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-        .cta-btn { padding: 14px 32px; border-radius: 12px; font-weight: 700; text-decoration: none; font-size: 1rem; transition: all .2s; }
-        .cta-btn-primary { background: #fff; color: #1e88e5; }
-        .cta-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,.2); }
-        
-        .footer { background: #0f1d2f; color: #fff; padding: 40px 20px 24px; margin-top: 60px; }
-        .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 24px; }
-        .footer p { color: #aaa; font-size: .85rem; }
-        .footer a { color: #aaa; text-decoration: none; }
-        .footer a:hover { color: #fff; }
-
-        @media (max-width: 768px) {
-            .header-nav { display: none; }
-            .hamburger { display: flex; }
-            .section-title { font-size: 1.8rem; }
-            .stats-section { grid-template-columns: repeat(2, 1fr); }
-            .cta-section { padding: 32px 20px; }
-            .cta-buttons { flex-direction: column; align-items: center; }
-        }
-        @media (max-width: 480px) {
-            .page-hero { padding: 110px 16px 40px; }
-            .section-title { font-size: 1.4rem; }
-            .section-subtitle { font-size: .9rem; }
-            .story-section p { font-size: 1rem; }
-            .value-card { padding: 24px 16px; border-radius: 14px; }
-            .value-title { font-size: 1.1rem; }
-            .value-desc { font-size: .9rem; }
-            .stat-item { padding: 24px 16px; }
-            .stat-number { font-size: 2rem; }
-            .stat-label { font-size: .9rem; }
-            .cta-section { padding: 24px 16px; border-radius: 16px; margin: 40px 16px; }
-            .cta-section h2 { font-size: 1.4rem; }
-            .cta-btn { min-height: 48px; padding: 12px 24px; }
-            .cta-buttons .cta-btn { width: 100%; }
-            .footer-inner { flex-direction: column; text-align: center; }
-            .footer-inner > div { text-align: center; }
-        }
-        @media (max-width: 380px) {
-            .page-hero { padding: 100px 12px 32px; }
-            .section-title { font-size: 1.2rem; }
-            .value-card { padding: 20px 12px; }
-            .stat-item { padding: 20px 12px; }
-            .stat-number { font-size: 1.6rem; }
-        }
-    </style>
+    <link rel="stylesheet" href="common.css">
     <!-- Vercel Analytics & Speed Insights -->
     <script defer src="/_vercel/insights/script.js"></script>
     <script defer src="/_vercel/speed-insights/script.js"></script>
@@ -156,7 +60,7 @@
 <!-- End Google Tag Manager (noscript) -->
 
 <header class="header">
-    <a href="index.html" class="header-logo">
+    <a href="index.html" class="header-logo" title="СептикПро — главная страница">
         <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect x="2" y="2" width="36" height="36" rx="8" fill="#1e88e5"/>
             <circle cx="20" cy="20" r="10" fill="#fff"/>
@@ -165,27 +69,31 @@
         <span>СептикПро</span>
     </a>
     <nav class="header-nav">
-        <a href="index.html#advantages">Преимущества</a>
-        <a href="index.html#gallery">Работы</a>
-        <a href="index.html#calculator">Калькулятор</a>
-        <a href="index.html#pricing">Цены</a>
-        <a href="index.html#contact">Контакты</a>
-        <a href="tel:+79514231381" class="header-phone-btn">📞 +7 (951) 423-13-81</a>
+        <a href="index.html#advantages" title="Преимущества септиков Евролос">Преимущества</a>
+        <a href="index.html#calculator" title="Калькулятор стоимости септика">Калькулятор</a>
+        <a href="tseny.html" title="Цены на септики под ключ">Цены</a>
+        <a href="index.html#contact" title="Контакты СептикПро">Контакты</a>
+        <a href="tel:+79514231381" class="header-phone-btn" title="Позвонить СептикПро">📞 +7 (951) 423-13-81</a>
     </nav>
     <button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
 </header>
 <div class="mobile-menu" id="mobileMenu">
-    <a href="index.html#advantages" onclick="toggleMenu()">Преимущества</a>
-    <a href="index.html#gallery" onclick="toggleMenu()">Работы</a>
-    <a href="index.html#calculator" onclick="toggleMenu()">Калькулятор</a>
-    <a href="index.html#pricing" onclick="toggleMenu()">Цены</a>
-    <a href="index.html#contact" onclick="toggleMenu()">Контакты</a>
+    <a href="index.html#advantages" title="Преимущества септиков Евролос" onclick="toggleMenu()">Преимущества</a>
+    <a href="index.html#calculator" title="Калькулятор стоимости септика" onclick="toggleMenu()">Калькулятор</a>
+    <a href="tseny.html" title="Цены на септики под ключ" onclick="toggleMenu()">Цены</a>
+    <a href="index.html#contact" title="Контакты СептикПро" onclick="toggleMenu()">Контакты</a>
     <a href="tel:+79514231381" style="color:#1e88e5;">📞 +7 (951) 423-13-81</a>
 </div>
 
+<div class="breadcrumbs">
+    <a href="index.html">Главная</a>
+    <span class="sep">›</span>
+    <span>О компании</span>
+</div>
+
 <section class="page-hero">
-    <h1 class="section-title">О компании</h1>
-    <p class="section-subtitle">Профессиональная установка септиков в Орле и Орловской области</p>
+    <h1 class="section-title">О компании СептикПро — монтаж септиков в Орле</h1>
+    <p class="section-subtitle">Профессиональная установка септиков Евролос в Орле и Орловской области с 2018 года</p>
 </section>
 
 <section>
@@ -265,16 +173,16 @@
             <p style="margin-top:8px;">Установка септиков в Орле и Орловской области</p>
         </div>
         <p style="color:#aaa; font-size:.85rem;">
-            <a href="index.html#advantages" style="color:#aaa; display:block; margin-bottom:4px;">Преимущества</a>
-            <a href="index.html#gallery" style="color:#aaa; display:block; margin-bottom:4px;">Наши работы</a>
-            <a href="index.html#calculator" style="color:#aaa; display:block; margin-bottom:4px;">Калькулятор</a>
-            <a href="index.html#pricing" style="color:#aaa; display:block; margin-bottom:4px;">Цены</a>
-            <a href="index.html#reviews" style="color:#aaa; display:block; margin-bottom:4px;">Отзывы</a>
-            <a href="index.html#faq" style="color:#aaa; display:block; margin-bottom:4px;">FAQ</a>
-            <a href="index.html#contact" style="color:#aaa; display:block;">Контакты</a>
+            <a href="index.html#advantages" title="Преимущества септиков Евролос" style="color:#aaa; display:block; margin-bottom:4px;">Преимущества</a>
+            <a href="index.html#gallery" title="Фото работ по монтажу септиков" style="color:#aaa; display:block; margin-bottom:4px;">Наши работы</a>
+            <a href="index.html#calculator" title="Калькулятор стоимости септика" style="color:#aaa; display:block; margin-bottom:4px;">Калькулятор</a>
+            <a href="tseny.html" title="Цены на септики под ключ" style="color:#aaa; display:block; margin-bottom:4px;">Цены</a>
+            <a href="faq.html" title="Часто задаваемые вопросы о септиках" style="color:#aaa; display:block; margin-bottom:4px;">FAQ</a>
+            <a href="privacy.html" title="Политика конфиденциальности" style="color:#aaa; display:block; margin-bottom:4px;">Политика конфиденциальности</a>
+            <a href="index.html#contact" title="Контакты СептикПро" style="color:#aaa; display:block;">Контакты</a>
         </p>
         <div style="text-align:right;">
-            <p style="color:#aaa; font-size:.85rem;">© 2024 СептикПро. Все права защищены.</p>
+            <p style="color:#aaa; font-size:.85rem;">© 2026 СептикПро. Все права защищены.</p>
             <p style="color:#aaa; font-size:.8rem; margin-top:4px;">г. Орёл, Орловская область</p>
         </div>
     </div>

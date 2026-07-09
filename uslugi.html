@@ -2,6 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Услуги по установке септиков в Орле | СептикПро</title>
     <meta name="description" content="Полный перечень услуг компании СептикПро: монтаж септиков, обслуживание, ремонт, откачка ила, замена фильтров в Орле и Орловской области">
@@ -54,6 +55,12 @@
     <!-- Vercel Analytics & Speed Insights -->
     <script defer src="/_vercel/insights/script.js"></script>
     <script defer src="/_vercel/speed-insights/script.js"></script>
+    <style>
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s cubic-bezier(.22,.61,.36,1), transform .7s cubic-bezier(.22,.61,.36,1); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .service-card { transition: all .4s cubic-bezier(.22,.61,.36,1); }
+        .service-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,.12); }
+    </style>
 </head>
 <body>
 
@@ -62,7 +69,7 @@
 <!-- End Google Tag Manager (noscript) -->
 
 <header class="header">
-    <a href="index.html" class="header-logo">
+    <a href="index.html" class="header-logo" title="СептикПро — главная страница">
         <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect x="2" y="2" width="36" height="36" rx="8" fill="#1e88e5"/>
             <circle cx="20" cy="20" r="10" fill="#fff"/>
@@ -71,27 +78,31 @@
         <span>СептикПро</span>
     </a>
     <nav class="header-nav">
-        <a href="index.html#advantages">Преимущества</a>
-        <a href="index.html#gallery">Работы</a>
-        <a href="index.html#calculator">Калькулятор</a>
-        <a href="index.html#pricing">Цены</a>
-        <a href="index.html#contact">Контакты</a>
-        <a href="tel:+79514231381" class="header-phone-btn">📞 +7 (951) 423-13-81</a>
+        <a href="index.html#advantages" title="Преимущества септиков Евролос">Преимущества</a>
+        <a href="index.html#calculator" title="Калькулятор стоимости септика">Калькулятор</a>
+        <a href="tseny.html" title="Цены на септики под ключ">Цены</a>
+        <a href="index.html#contact" title="Контакты СептикПро">Контакты</a>
+        <a href="tel:+79514231381" class="header-phone-btn" title="Позвонить СептикПро">📞 +7 (951) 423-13-81</a>
     </nav>
     <button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
 </header>
 <div class="mobile-menu" id="mobileMenu">
-    <a href="index.html#advantages" onclick="toggleMenu()">Преимущества</a>
-    <a href="index.html#gallery" onclick="toggleMenu()">Работы</a>
-    <a href="index.html#calculator" onclick="toggleMenu()">Калькулятор</a>
-    <a href="index.html#pricing" onclick="toggleMenu()">Цены</a>
-    <a href="index.html#contact" onclick="toggleMenu()">Контакты</a>
+    <a href="index.html#advantages" title="Преимущества септиков Евролос" onclick="toggleMenu()">Преимущества</a>
+    <a href="index.html#calculator" title="Калькулятор стоимости септика" onclick="toggleMenu()">Калькулятор</a>
+    <a href="tseny.html" title="Цены на септики под ключ" onclick="toggleMenu()">Цены</a>
+    <a href="index.html#contact" title="Контакты СептикПро" onclick="toggleMenu()">Контакты</a>
     <a href="tel:+79514231381" style="color:#1e88e5;">📞 +7 (951) 423-13-81</a>
 </div>
 
+<div class="breadcrumbs">
+    <a href="index.html">Главная</a>
+    <span class="sep">›</span>
+    <span>Услуги</span>
+</div>
+
 <section class="page-hero">
-    <h1 class="section-title">Наши услуги</h1>
-    <p class="section-subtitle">Полный спектр работ по монтажу, обслуживанию и ремонту септиков в Орле и Орловской области</p>
+    <h1 class="section-title">Услуги по установке и обслуживанию септиков Евролос</h1>
+    <p class="section-subtitle">Полный спектр работ по монтажу, обслуживанию и ремонту септиков Евролос в Орле и Орловской области</p>
 </section>
 
 <section>
@@ -133,6 +144,9 @@
             <a href="tel:+79514231381" class="service-link">Заказать →</a>
         </div>
     </div>
+    <div style="text-align:center; margin-top:48px;">
+        <a href="tseny.html" class="cta-btn cta-btn-primary" style="display:inline-flex; text-decoration:none;">Посмотреть цены →</a>
+    </div>
 </section>
 
 <section style="padding: 0 20px;">
@@ -159,16 +173,16 @@
             <p style="margin-top:8px;">Установка септиков в Орле и Орловской области</p>
         </div>
         <p style="color:#aaa; font-size:.85rem;">
-            <a href="index.html#advantages" style="color:#aaa; display:block; margin-bottom:4px;">Преимущества</a>
-            <a href="index.html#gallery" style="color:#aaa; display:block; margin-bottom:4px;">Наши работы</a>
-            <a href="index.html#calculator" style="color:#aaa; display:block; margin-bottom:4px;">Калькулятор</a>
-            <a href="index.html#pricing" style="color:#aaa; display:block; margin-bottom:4px;">Цены</a>
-            <a href="index.html#reviews" style="color:#aaa; display:block; margin-bottom:4px;">Отзывы</a>
-            <a href="index.html#faq" style="color:#aaa; display:block; margin-bottom:4px;">FAQ</a>
-            <a href="index.html#contact" style="color:#aaa; display:block;">Контакты</a>
+            <a href="index.html#advantages" title="Преимущества септиков Евролос" style="color:#aaa; display:block; margin-bottom:4px;">Преимущества</a>
+            <a href="index.html#gallery" title="Фото работ по монтажу септиков" style="color:#aaa; display:block; margin-bottom:4px;">Наши работы</a>
+            <a href="index.html#calculator" title="Калькулятор стоимости септика" style="color:#aaa; display:block; margin-bottom:4px;">Калькулятор</a>
+            <a href="tseny.html" title="Цены на септики под ключ" style="color:#aaa; display:block; margin-bottom:4px;">Цены</a>
+            <a href="faq.html" title="Часто задаваемые вопросы о септиках" style="color:#aaa; display:block; margin-bottom:4px;">FAQ</a>
+            <a href="privacy.html" title="Политика конфиденциальности" style="color:#aaa; display:block; margin-bottom:4px;">Политика конфиденциальности</a>
+            <a href="index.html#contact" title="Контакты СептикПро" style="color:#aaa; display:block;">Контакты</a>
         </p>
         <div style="text-align:right;">
-            <p style="color:#aaa; font-size:.85rem;">© 2024 СептикПро. Все права защищены.</p>
+            <p style="color:#aaa; font-size:.85rem;">© 2026 СептикПро. Все права защищены.</p>
             <p style="color:#aaa; font-size:.8rem; margin-top:4px;">г. Орёл, Орловская область</p>
         </div>
     </div>
